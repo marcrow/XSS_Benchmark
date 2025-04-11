@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>XSS Lab - Accueil</title>
-    <!-- Lien vers la feuille de style -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -22,7 +21,6 @@
 
     <hr>
 
-    <!-- Optionnel: Affichage du dernier scénario si passé par le contrôleur -->
     {% if last_scenario %}
         <p>Dernier scénario créé : ID {{ last_scenario.id }} - {{ last_scenario.name }}</p>
     {% else %}
@@ -43,21 +41,129 @@
 
     <hr>
 
-    <!-- Bouton pour lancer le test automatique -->
-    <form action="/auto/run_all" method="GET">
-        <label for="pid">Payload ID:</label>
-        <input type="number" name="payload_id" id="pid" value="1" />
+    <!-- Test automatique classique -->
+    <form id="form-auto" data-mode="auto">
+        <label for="pid-auto">Payload ID:</label>
+        <input type="number" id="pid-auto" value="1" />
         <button type="submit">Lancer le test automatique</button>
     </form>
 
-    <form action="/auto_headless/run_all" method="GET">
-        <label for="pid">Payload ID:</label>
-        <input type="number" name="payload_id" id="pid" value="1" />
-        <button type="submit">Lancer le test automatique</button>
+    <!-- Test headless -->
+    <form id="form-headless" data-mode="headless">
+        <label for="pid-headless">Payload ID:</label>
+        <input type="number" id="pid-headless" value="1" />
+        <button type="submit">Lancer le test headless</button>
     </form>
 
     <p>Notes: seuls console.log("x") et alert() sont surveillés pour déclencher notifyXSS.</p>
 
+    <div id="progress-container" style="display:none; margin-top: 20px;">
+        <h3>Progression des tests</h3>
+        <div style="width: 100%; background: #ddd; border-radius: 8px;">
+            <div id="progress-bar" style="width: 0%; height: 20px; background: #007BFF; border-radius: 8px;"></div>
+        </div>
+        <p id="progress-text">0 / 0</p>
+        <ul id="results-list" style="margin-top: 10px;"></ul>
+        <a id="export-report" style="display:none; margin-top: 10px;" class="button" target="_blank">📄 Rapport Markdown</a>
+    </div>
+
+    <script>
+        let testEnCours = false;
+
+        function pollScoreboard(payloadId, visited, progressBar, progressText, exportBtn) {
+            const total = visited.length;
+            const triggeredByScenario = new Set();
+            const handled = new Set();
+            const interval = setInterval(() => {
+                fetch('/results/scoreboard')
+                    .then(r => r.json())
+                    .then(allResults => {
+                        const relevant = allResults.filter(r => r.payload_id == payloadId);
+                        relevant.forEach(r => {
+                            const li = document.getElementById(`result-${r.scenario_id}`);
+                            if (!li || handled.has(r.scenario_id)) return;
+
+                            const link = `/scenario/${r.scenario_id}?payload_id=${payloadId}`;
+                            li.innerHTML = `<a href="${link}" target="_blank"><strong>${r.scenario_name || 'Scenario ' + r.scenario_id}</strong></a>`;
+                            if (r.triggered === "Yes") {
+                                li.innerHTML += " ✅ XSS déclenchée";
+                                li.style.color = "green";
+                                triggeredByScenario.add(r.scenario_id);
+                            } else {
+                                li.innerHTML += " ❌ Non déclenchée";
+                                li.style.color = "red";
+                            }
+
+                            handled.add(r.scenario_id);
+                            const percent = Math.floor((handled.size / total) * 100);
+                            progressBar.style.width = `${percent}%`;
+                            progressText.textContent = `${handled.size} / ${total}`;
+                        });
+
+                        if (handled.size >= total) {
+                            clearInterval(interval);
+                            exportBtn.href = `/results/report_md?payload_id=${payloadId}`;
+                            exportBtn.style.display = "inline-block";
+                            testEnCours = false;
+                        }
+                    });
+            }, 2000);
+        }
+
+        function attachFormHandler(formId, inputId, mode) {
+            const form = document.getElementById(formId);
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                if (testEnCours) {
+                    alert("Un test est déjà en cours.");
+                    return;
+                }
+                testEnCours = true;
+
+                const payloadId = document.getElementById(inputId).value;
+                const progressContainer = document.getElementById("progress-container");
+                const progressBar = document.getElementById("progress-bar");
+                const progressText = document.getElementById("progress-text");
+                const resultsList = document.getElementById("results-list");
+                const exportBtn = document.getElementById("export-report");
+
+                progressContainer.style.display = "block";
+                progressBar.style.width = "0%";
+                resultsList.innerHTML = "";
+                exportBtn.style.display = "none";
+
+                const url = mode === "headless"
+                    ? `/auto_headless/run_all?payload_id=${payloadId}`
+                    : `/auto/run_all?payload_id=${payloadId}`;
+
+                fetch(url)
+                    .then(resp => resp.json())
+                    .then(data => {
+                        const visited = data.visited || data.tested || [];
+                        const total = visited.length;
+                        resultsList.innerHTML = "";
+
+                        visited.forEach(entry => {
+                            const li = document.createElement("li");
+                            li.id = `result-${entry.scenario_id}`;
+                            li.innerHTML = `<strong>${entry.scenario_name}</strong> ⏳`;
+                            resultsList.appendChild(li);
+                        });
+
+                        pollScoreboard(payloadId, visited, progressBar, progressText, exportBtn);
+                    })
+                    .catch(err => {
+                        alert("Erreur : " + err);
+                        testEnCours = false;
+                    });
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            attachFormHandler("form-auto", "pid-auto", "auto");
+            attachFormHandler("form-headless", "pid-headless", "headless");
+        });
+    </script>
 </main>
 </body>
 </html>

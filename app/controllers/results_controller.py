@@ -59,30 +59,31 @@ def scoreboard():
 
 @results_bp.route('/report_md', methods=['GET'])
 def report_markdown():
-    """
-    Génère un rapport Markdown plus propre.
-    """
-    results = Result.query.all()
+    payload_id = request.args.get('payload_id', type=int)
+    if not payload_id:
+        return "Missing ?payload_id=", 400
+
+    results = Result.query.filter_by(payload_id=payload_id).all()
+    if not results:
+        return "Aucun résultat pour ce payload", 404
+
+    payload = Payload.query.get(payload_id)
+    total = len(results)
+    triggered = sum(1 for r in results if r.triggered)
 
     lines = []
-    # Titre
-    lines.append("# Rapport XSS\n")
-    # En-tête de la table
-    lines.append("|Scenario|Scenario ID|Payload ID|Triggered|RegexMatches|Size|Timestamp|")
-    lines.append("|---|---|---|---|---|---|---|")
+    lines.append(f"# Rapport XSS - Payload #{payload_id}")
+    lines.append(f"**Date :** {datetime.datetime.utcnow().isoformat()}")
+    lines.append(f"**Payload :** `{payload.content}`")
+    lines.append(f"**Score global :** {triggered} / {total} ({round(triggered/total*100)}%)")
+    lines.append(f"**Taille :** {payload.size} caractères\n")
+
+    lines.append("## Détail des scénarios")
+    lines.append("|Scenario|ID|Déclenché|Regex Match|Timestamp|")
+    lines.append("|---|---|---|---|---|")
 
     for r in results:
-        scenario_name = r.scenario.name if r.scenario else ""
-        scenario_id = r.scenario_id
-        payload_id = r.payload_id
-        triggered = "Yes" if r.triggered else "No"
-        regex_matches = r.regex_matches
-        size = r.payload.size if r.payload else 0
-        timestamp = r.test_timestamp.isoformat() if r.test_timestamp else ""
+        lines.append(f"|{r.scenario.name}|{r.scenario_id}|{'✅' if r.triggered else '❌'}|{r.regex_matches}|{r.test_timestamp.strftime('%Y-%m-%d %H:%M:%S')}|")
 
-        row = f"|{scenario_name}|{scenario_id}|{payload_id}|{triggered}|{regex_matches}|{size}|{timestamp}|"
-        lines.append(row)
+    return "\n".join(lines), 200, {"Content-Type": "text/markdown; charset=utf-8"}
 
-    # Pour forcer l'affichage en tant que "plain text" (utile dans un navigateur)
-    md_output = "\n".join(lines)
-    return md_output, 200, {"Content-Type": "text/plain; charset=utf-8"}
