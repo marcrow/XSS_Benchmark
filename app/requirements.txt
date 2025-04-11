@@ -1,0 +1,8 @@
+Flask==2.3.2
+gunicorn==20.1.0
+sqlalchemy==2.0.9
+psycopg2-binary==2.9.5
+requests==2.31.0
+markdownify==0.11.0  # Pour générer du markdown, si besoin
+regex==2023.3.23     # Pour la détection par regex
+Flask-SQLAlchemy==3.0.3

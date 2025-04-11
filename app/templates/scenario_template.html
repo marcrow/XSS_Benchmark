@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ scenario.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+        <!-- Balise script pour envoyer un beacon en cas d'exécution -->
+        <script>
+            function notifyXSS() {
+              fetch("{{ url_for('results_bp.report_xss', _external=True) }}?scenario_id={{ scenario.id }}&payload_id={{ payload.id if payload else 0 }}")
+                .then(r => console.log("XSS reported"))
+                .catch(e => console.error("Report failed", e));
+            }
+        
+            // Surcharge de console.log pour détecter "x" dans les arguments
+            const originalConsoleLog = console.log;
+            console.log = function(...args) {
+              // On concatène tous les arguments en une chaîne
+              const message = args.join(' ');
+              // S'il y a la lettre "x", on déclenche notifyXSS()
+              if (message.includes('x')) {
+                notifyXSS();
+              }
+              // On appelle le vrai console.log
+              originalConsoleLog.apply(console, args);
+            };
+        
+            // Surcharge de window.alert pour détecter si on lance une alerte
+            const originalAlert = window.alert;
+            window.alert = function(msg) {
+              // Ici, on déclenche notifyXSS() sur toute alerte
+              // (ou seulement si msg contient "x" si vous voulez)
+              notifyXSS();
+        
+              // On appelle le vrai alert
+              originalAlert(msg);
+            };
+        </script>
+    <h2>{{ scenario.name }}</h2>
+    <p><strong>Description:</strong> {{ scenario.description }}</p>
+
+    {% if "Scenario 1" in scenario.name %}
+        <p>{{ payload.content|safe }}</p>
+    {% elif "Scenario 2" in scenario.name %}
+        <img src="#" onmouseover="{{ payload.content|safe }}">
+    {% elif "Scenario 3" in scenario.name %}
+        <script>
+        {{ payload.content|safe }}
+        </script>
+    {% elif "Scenario 4" in scenario.name %}
+        <input type="hidden" name="data" value="{{ payload.content|safe }}">
+    {% elif "Scenario 5" in scenario.name %}
+        <img src="{{ payload.content|safe }}">
+    {% elif "Scenario 6" in scenario.name %}
+        <a href="{{ payload.content|safe }}">Clique ici</a>
+    {% elif "Scenario 7" in scenario.name %}
+        <script src="{{ payload.content|safe }}"></script>
+    {% elif "Scenario 8" in scenario.name %}
+        <button onclick="{{ payload.content|safe }}">Click me</button>
+    {% elif "Scenario 9" in scenario.name %}
+        <textarea>{{ payload.content|safe }}</textarea>
+    {% elif "Scenario 10" in scenario.name %}
+        <!-- {{ payload.content|safe }} -->
+    {% elif "Scenario 11" in scenario.name %}
+        <script>
+        var obj = {"callback": "{{ payload.content|safe }}"};
+        </script>
+    {% elif "Scenario 12" in scenario.name %}
+        <select><option value="{{ payload.content|safe }}">Payload</option></select>
+    {% elif "Scenario 13" in scenario.name %}
+        <div style="{{ payload.content|safe }}">Stylé</div>
+    {% elif "Scenario 14" in scenario.name %}
+        <meta http-equiv="refresh" content="1;url={{ payload.content|safe }}">
+    {% elif "Scenario 15" in scenario.name %}
+        <title>{{ payload.content|safe }}</title>
+    {% elif "Scenario 16" in scenario.name %}
+        <script>
+        var msg = "{{ payload.content|safe }}";
+        </script>
+    {% elif "Scenario 17" in scenario.name %}
+        <div data-info="{{ payload.content|safe }}">Element</div>
+    {% elif "Scenario 18" in scenario.name %}
+        <table><tr><td>{{ payload.content|safe }}</td></tr></table>
+    {% elif "Scenario 19" in scenario.name %}
+        <input placeholder="{{ payload.content|safe }}">
+    {% elif "Scenario 20" in scenario.name %}
+        <iframe src="{{ payload.content|safe }}"></iframe>
+    {% endif %}
+
+
+    
+</body>
+</html>

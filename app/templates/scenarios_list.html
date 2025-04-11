@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Scénarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Liste des Scénarios</h1>
+    <ul>
+    {% for scenario in scenarios %}
+        <li>
+            <strong>ID : {{ scenario.id }}</strong> -
+            {{ scenario.name }}
+            <!-- Lien vers la page /scenario/<id> -->
+            <a href="/scenario/{{ scenario.id }}">Accéder à ce scénario</a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

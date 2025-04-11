@@ -1,0 +1,57 @@
+/* main.css - style minimaliste */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background: #f9f9f9;
+    color: #333;
+  }
+  
+  h1, h2 {
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 5px 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #007BFF;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  hr {
+    margin: 20px 0;
+  }
+  
+  label {
+    margin-right: 5px;
+  }
+  
+  input[type="text"], input[type="number"], input[type="file"] {
+    padding: 4px;
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 5px 12px;
+    border: none;
+    background: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  

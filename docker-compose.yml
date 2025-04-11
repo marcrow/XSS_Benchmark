@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:15
+    container_name: xsslab_db
+    environment:
+      - POSTGRES_DB=xsslab
+      - POSTGRES_USER=xssuser
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - xsslab_net
+
+  app:
+    build: ./app
+    container_name: xsslab_app
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=production
+      - DB_HOST=db
+      - DB_NAME=xsslab
+      - DB_USER=xssuser
+      - DB_PASSWORD=secret
+    # volumes:
+    #   - ./:/app  # Optionnel si on veut faire du dev local
+    networks:
+      - xsslab_net
+
+volumes:
+  db_data:
+
+networks:
+  xsslab_net:
+    driver: bridge

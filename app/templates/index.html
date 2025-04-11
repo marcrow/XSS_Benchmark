@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Lab - Accueil</title>
+    <!-- Lien vers la feuille de style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Bienvenue dans le Lab XSS</h1>
+</header>
+<main>
+    <nav>
+        <ul>
+            <li><a href="/scenarios">Liste des Scénarios</a></li>
+            <li><a href="/payloads/payloads">Gérer les Payloads</a></li>
+            <li><a href="/results/scoreboard">Scoreboard JSON</a></li>
+            <li><a href="/results/report_md">Rapport Markdown</a></li>
+        </ul>
+    </nav>
+
+    <hr>
+
+    <!-- Optionnel: Affichage du dernier scénario si passé par le contrôleur -->
+    {% if last_scenario %}
+        <p>Dernier scénario créé : ID {{ last_scenario.id }} - {{ last_scenario.name }}</p>
+    {% else %}
+        <p>Aucun scénario créé pour l'instant.</p>
+    {% endif %}
+
+    <form action="/payloads/upload_payload" method="POST">
+        <label for="payload">Ajouter un payload :</label>
+        <input type="text" name="payload">
+        <button type="submit">Submit</button>
+    </form>
+
+    <form action="/payloads/upload_file" method="POST" enctype="multipart/form-data">
+        <label for="file">Charger un fichier de payloads :</label>
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <hr>
+
+    <!-- Bouton pour lancer le test automatique -->
+    <form action="/auto/run_all" method="GET">
+        <label for="pid">Payload ID:</label>
+        <input type="number" name="payload_id" id="pid" value="1" />
+        <button type="submit">Lancer le test automatique</button>
+    </form>
+
+    <form action="/auto_headless/run_all" method="GET">
+        <label for="pid">Payload ID:</label>
+        <input type="number" name="payload_id" id="pid" value="1" />
+        <button type="submit">Lancer le test automatique</button>
+    </form>
+
+    <p>Notes: seuls console.log("x") et alert() sont surveillés pour déclencher notifyXSS.</p>
+
+</main>
+</body>
+</html>
