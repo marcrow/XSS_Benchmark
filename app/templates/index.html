@@ -2,69 +2,60 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>XSS Lab - Accueil</title>
+    <title>XSS Lab - Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 <header>
-    <h1>Bienvenue dans le Lab XSS</h1>
+    <h1>Welcome to the XSS Lab</h1>
 </header>
+
+{% include "_menu.html" %}
+
 <main>
-    <nav>
-        <ul>
-            <li><a href="/scenarios">Liste des Scénarios</a></li>
-            <li><a href="/payloads/payloads">Gérer les Payloads</a></li>
-            <li><a href="/results/scoreboard">Scoreboard JSON</a></li>
-            <li><a href="/results/report_md">Rapport Markdown</a></li>
-        </ul>
-    </nav>
+    <div class="section payload-form">
+        <form action="/payloads/upload_payload" method="POST">
+            <label for="payload"><strong>Add a payload:</strong></label><br>
+            <textarea name="payload" id="payload" placeholder="Enter your payload here..."></textarea>
+            <br>
+            <button type="submit">Add</button>
+        </form>
 
-    <hr>
+        <form class="file-upload-form" action="/payloads/upload_file" method="POST" enctype="multipart/form-data">
+            <label for="file"><strong>Upload a payload file:</strong></label><br>
+            <input type="file" name="file" id="file">
+            <br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
 
-    {% if last_scenario %}
-        <p>Dernier scénario créé : ID {{ last_scenario.id }} - {{ last_scenario.name }}</p>
-    {% else %}
-        <p>Aucun scénario créé pour l'instant.</p>
-    {% endif %}
+    <div class="section test-section">
 
-    <form action="/payloads/upload_payload" method="POST">
-        <label for="payload">Ajouter un payload :</label>
-        <input type="text" name="payload">
-        <button type="submit">Submit</button>
-    </form>
+        <form id="form-headless" data-mode="headless">
+            <label for="pid-headless"><strong>Payload:</strong></label>
+            <select id="pid-headless" name="pid-headless" style="min-width: 320px;">
+                {% for p in payloads %}
+                    <option value="{{ p.id }}">
+                        [{{ p.id }}] {{ p.payload[:30]|e }}{% if p.payload|length > 30 %}...{% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Start bXSS Benchmark!</button>
+        </form>
+        <p style="color: #888; font-size: 0.95rem; margin-top: 0.5rem;">
+            Note: Only <code>console.log("x")</code> and <code>alert()</code> are monitored to trigger <code>notifyXSS</code>.
+        </p>
+    </div>
 
-    <form action="/payloads/upload_file" method="POST" enctype="multipart/form-data">
-        <label for="file">Charger un fichier de payloads :</label>
-        <input type="file" name="file">
-        <button type="submit">Upload</button>
-    </form>
-
-    <hr>
-
-    <!-- Test automatique classique -->
-    <form id="form-auto" data-mode="auto">
-        <label for="pid-auto">Payload ID:</label>
-        <input type="number" id="pid-auto" value="1" />
-        <button type="submit">Lancer le test automatique</button>
-    </form>
-
-    <!-- Test headless -->
-    <form id="form-headless" data-mode="headless">
-        <label for="pid-headless">Payload ID:</label>
-        <input type="number" id="pid-headless" value="1" />
-        <button type="submit">Lancer le test headless</button>
-    </form>
-
-    <p>Notes: seuls console.log("x") et alert() sont surveillés pour déclencher notifyXSS.</p>
-
-    <div id="progress-container" style="display:none; margin-top: 20px;">
-        <h3>Progression des tests</h3>
+    <div id="progress-container" style="display:none;">
+        <h3>Test Progress</h3>
         <div style="width: 100%; background: #ddd; border-radius: 8px;">
             <div id="progress-bar" style="width: 0%; height: 20px; background: #007BFF; border-radius: 8px;"></div>
         </div>
         <p id="progress-text">0 / 0</p>
         <ul id="results-list" style="margin-top: 10px;"></ul>
-        <a id="export-report" style="display:none; margin-top: 10px;" class="button" target="_blank">📄 Rapport Markdown</a>
+        <a id="export-report" style="display:none; margin-top: 10px;" class="button" target="_blank">📄 Markdown Report</a>
     </div>
 
     <script>
@@ -94,15 +85,15 @@
                 li.innerHTML = `<a href="${link}" target="_blank"><strong>${r.scenario_name || 'Scenario ' + r.scenario_id}</strong></a>`;
 
                 if (r.status === "pending") {
-                    li.innerHTML += " ⏳ En attente";
+                    li.innerHTML += " ⏳ Pending";
                     li.style.color = "gray";
                     hasPending = true;
                 } else if (r.triggered === "Yes") {
-                    li.innerHTML += " ✅ XSS déclenchée";
+                    li.innerHTML += " ✅ XSS triggered";
                     li.style.color = "green";
                     handled++;
                 } else {
-                    li.innerHTML += " ❌ Non déclenchée";
+                    li.innerHTML += " ❌ Not triggered";
                     li.style.color = "red";
                     handled++;
                 }
@@ -135,7 +126,7 @@
 
         function runHeadlessTestWithSSE(payloadId) {
             if (testEnCours) {
-                alert("Un test est déjà en cours.");
+                alert("A test is already running.");
                 return;
             }
             testEnCours = true;
@@ -186,48 +177,12 @@
                     };
                 })
                 .catch(err => {
-                    alert("Erreur : " + err);
-                    testEnCours = false;
-                });
-        }
-
-        function runRegularTest(payloadId) {
-            if (testEnCours) {
-                alert("Un test est déjà en cours.");
-                return;
-            }
-            testEnCours = true;
-
-            const progressContainer = document.getElementById("progress-container");
-            const progressBar = document.getElementById("progress-bar");
-            const progressText = document.getElementById("progress-text");
-            const resultsList = document.getElementById("results-list");
-            const exportBtn = document.getElementById("export-report");
-
-            progressContainer.style.display = "block";
-            progressBar.style.width = "0%";
-            resultsList.innerHTML = "";
-            exportBtn.style.display = "none";
-
-            fetch(`/auto/run_all?payload_id=${payloadId}`)
-                .then(resp => resp.json())
-                .then(data => {
-                    pollScoreboard(payloadId, progressBar, progressText, resultsList, exportBtn);
-                })
-                .catch(err => {
-                    alert("Erreur : " + err);
+                    alert("Error: " + err);
                     testEnCours = false;
                 });
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            // Regular test form
-            document.getElementById("form-auto").addEventListener("submit", function(e) {
-                e.preventDefault();
-                const payloadId = document.getElementById("pid-auto").value;
-                runRegularTest(payloadId);
-            });
-            
             // Headless test form with SSE
             document.getElementById("form-headless").addEventListener("submit", function(e) {
                 e.preventDefault();

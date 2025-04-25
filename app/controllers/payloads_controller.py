@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, render_template
 from models import Payload, db
 import re
 
@@ -45,8 +45,9 @@ def upload_file():
 
 @payloads_bp.route('/payloads', methods=['GET'])
 def list_payloads():
-    payloads = Payload.query.all()
-    return """<h1>List of Payloads</h1>""" + "<br>".join([f"{{p.id}} - {{p.content}}" for p in payloads])
+    payloads = Payload.query.order_by(Payload.id.asc()).all()
+    payloads_data = [{"id": p.id, "payload": p.content} for p in payloads]
+    return render_template("payloads.html", payloads=payloads_data)
 
 def detect_regex(payload_content: str) -> int:
     """Retourne le nombre de patterns qui matchent."""

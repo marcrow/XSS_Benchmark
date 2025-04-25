@@ -4,7 +4,7 @@ from sqlalchemy.exc import OperationalError
 from flask import Flask, render_template
 from config import config
 from db import init_db
-from models import db, Scenario
+from models import db, Scenario, Payload
 from scenarios.basic_scenarios import basic_scenarios
 
 MAX_DB_RETRIES = 15
@@ -58,7 +58,9 @@ def create_app():
     @app.route('/')
     def index():
         last_scenario = Scenario.query.order_by(Scenario.id.desc()).first()
-        return render_template('index.html', last_scenario=last_scenario)
+        payloads = Payload.query.order_by(Payload.id.asc()).all()
+        payloads_data = [{"id": p.id, "payload": p.content} for p in payloads]
+        return render_template('index.html', last_scenario=last_scenario, payloads=payloads_data)
 
     return app
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Lab - Payloads</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Payloads List</h1>
+</header>
+
+{% include "_menu.html" %}
+
+<main>
+    <div class="section payload-list">
+        <h2>All Payloads</h2>
+        <table style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="text-align:left; padding: 8px; border-bottom: 2px solid #ccc;">ID</th>
+                    <th style="text-align:left; padding: 8px; border-bottom: 2px solid #ccc;">Payload (HTML-escaped)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in payloads %}
+                <tr>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">{{ p.id }}</td>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">
+                        <code>{{ p.payload|e }}</code>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2" style="padding: 8px; color: #888;">No payloads found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
