@@ -70,37 +70,60 @@
     <script>
         let testEnCours = false;
 
-        function pollScoreboard(payloadId, visited, progressBar, progressText, exportBtn) {
-            const total = visited.length;
-            const triggeredByScenario = new Set();
-            const handled = new Set();
+        function uuidv4() {
+            // Generate a random session ID
+            return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+        }
+
+        function updateResultsList(payloadId, allResults, resultsList) {
+            let handled = 0;
+            let total = allResults.length;
+            let hasPending = false;
+
+            allResults.forEach(r => {
+                const liId = `result-${r.scenario_id}`;
+                let li = document.getElementById(liId);
+                if (!li) {
+                    li = document.createElement("li");
+                    li.id = liId;
+                    resultsList.appendChild(li);
+                }
+                const link = `/scenario/${r.scenario_id}?payload_id=${payloadId}`;
+                li.innerHTML = `<a href="${link}" target="_blank"><strong>${r.scenario_name || 'Scenario ' + r.scenario_id}</strong></a>`;
+
+                if (r.status === "pending") {
+                    li.innerHTML += " ⏳ En attente";
+                    li.style.color = "gray";
+                    hasPending = true;
+                } else if (r.triggered === "Yes") {
+                    li.innerHTML += " ✅ XSS déclenchée";
+                    li.style.color = "green";
+                    handled++;
+                } else {
+                    li.innerHTML += " ❌ Non déclenchée";
+                    li.style.color = "red";
+                    handled++;
+                }
+            });
+
+            return { handled, total, hasPending };
+        }
+
+        function pollScoreboard(payloadId, progressBar, progressText, resultsList, exportBtn) {
+            // Poll the scoreboard for all scenarios for this payload
             const interval = setInterval(() => {
-                fetch('/results/scoreboard')
+                fetch(`/results/scoreboard?payload_id=${payloadId}`)
                     .then(r => r.json())
                     .then(allResults => {
-                        const relevant = allResults.filter(r => r.payload_id == payloadId);
-                        relevant.forEach(r => {
-                            const li = document.getElementById(`result-${r.scenario_id}`);
-                            if (!li || handled.has(r.scenario_id)) return;
+                        const { handled, total, hasPending } = updateResultsList(payloadId, allResults, resultsList);
 
-                            const link = `/scenario/${r.scenario_id}?payload_id=${payloadId}`;
-                            li.innerHTML = `<a href="${link}" target="_blank"><strong>${r.scenario_name || 'Scenario ' + r.scenario_id}</strong></a>`;
-                            if (r.triggered === "Yes") {
-                                li.innerHTML += " ✅ XSS déclenchée";
-                                li.style.color = "green";
-                                triggeredByScenario.add(r.scenario_id);
-                            } else {
-                                li.innerHTML += " ❌ Non déclenchée";
-                                li.style.color = "red";
-                            }
+                        const percent = total === 0 ? 0 : Math.floor((handled / total) * 100);
+                        progressBar.style.width = `${percent}%`;
+                        progressText.textContent = `${handled} / ${total}`;
 
-                            handled.add(r.scenario_id);
-                            const percent = Math.floor((handled.size / total) * 100);
-                            progressBar.style.width = `${percent}%`;
-                            progressText.textContent = `${handled.size} / ${total}`;
-                        });
-
-                        if (handled.size >= total) {
+                        if (!hasPending) {
                             clearInterval(interval);
                             exportBtn.href = `/results/report_md?payload_id=${payloadId}`;
                             exportBtn.style.display = "inline-block";
@@ -110,58 +133,107 @@
             }, 2000);
         }
 
-        function attachFormHandler(formId, inputId, mode) {
-            const form = document.getElementById(formId);
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
-                if (testEnCours) {
-                    alert("Un test est déjà en cours.");
-                    return;
-                }
-                testEnCours = true;
+        function runHeadlessTestWithSSE(payloadId) {
+            if (testEnCours) {
+                alert("Un test est déjà en cours.");
+                return;
+            }
+            testEnCours = true;
 
-                const payloadId = document.getElementById(inputId).value;
-                const progressContainer = document.getElementById("progress-container");
-                const progressBar = document.getElementById("progress-bar");
-                const progressText = document.getElementById("progress-text");
-                const resultsList = document.getElementById("results-list");
-                const exportBtn = document.getElementById("export-report");
+            const sessionId = uuidv4();
+            const progressContainer = document.getElementById("progress-container");
+            const progressBar = document.getElementById("progress-bar");
+            const progressText = document.getElementById("progress-text");
+            const resultsList = document.getElementById("results-list");
+            const exportBtn = document.getElementById("export-report");
 
-                progressContainer.style.display = "block";
-                progressBar.style.width = "0%";
-                resultsList.innerHTML = "";
-                exportBtn.style.display = "none";
+            progressContainer.style.display = "block";
+            progressBar.style.width = "0%";
+            resultsList.innerHTML = "";
+            exportBtn.style.display = "none";
 
-                const url = mode === "headless"
-                    ? `/auto_headless/run_all?payload_id=${payloadId}`
-                    : `/auto/run_all?payload_id=${payloadId}`;
+            // Start the headless test
+            fetch(`/auto_headless/run_all?payload_id=${payloadId}&session_id=${sessionId}`)
+                .then(resp => resp.json())
+                .then(data => {
+                    // Listen for progress updates via SSE
+                    const evtSource = new EventSource(`/progress/stream?session_id=${sessionId}`);
+                    
+                    evtSource.onmessage = function(event) {
+                        const [done, total] = event.data.split(',').map(Number);
+                        const percent = total === 0 ? 0 : Math.floor((done / total) * 100);
+                        progressBar.style.width = `${percent}%`;
+                        progressText.textContent = `${done} / ${total}`;
+                        
+                        if (done >= total) {
+                            evtSource.close();
+                            // Once SSE is done, poll for final results
+                            fetch(`/results/scoreboard?payload_id=${payloadId}`)
+                                .then(r => r.json())
+                                .then(allResults => {
+                                    updateResultsList(payloadId, allResults, resultsList);
+                                    exportBtn.href = `/results/report_md?payload_id=${payloadId}`;
+                                    exportBtn.style.display = "inline-block";
+                                    testEnCours = false;
+                                });
+                        }
+                    };
+                    
+                    evtSource.onerror = function() {
+                        evtSource.close();
+                        // Fall back to polling if SSE fails
+                        pollScoreboard(payloadId, progressBar, progressText, resultsList, exportBtn);
+                    };
+                })
+                .catch(err => {
+                    alert("Erreur : " + err);
+                    testEnCours = false;
+                });
+        }
 
-                fetch(url)
-                    .then(resp => resp.json())
-                    .then(data => {
-                        const visited = data.visited || data.tested || [];
-                        const total = visited.length;
-                        resultsList.innerHTML = "";
+        function runRegularTest(payloadId) {
+            if (testEnCours) {
+                alert("Un test est déjà en cours.");
+                return;
+            }
+            testEnCours = true;
 
-                        visited.forEach(entry => {
-                            const li = document.createElement("li");
-                            li.id = `result-${entry.scenario_id}`;
-                            li.innerHTML = `<strong>${entry.scenario_name}</strong> ⏳`;
-                            resultsList.appendChild(li);
-                        });
+            const progressContainer = document.getElementById("progress-container");
+            const progressBar = document.getElementById("progress-bar");
+            const progressText = document.getElementById("progress-text");
+            const resultsList = document.getElementById("results-list");
+            const exportBtn = document.getElementById("export-report");
 
-                        pollScoreboard(payloadId, visited, progressBar, progressText, exportBtn);
-                    })
-                    .catch(err => {
-                        alert("Erreur : " + err);
-                        testEnCours = false;
-                    });
-            });
+            progressContainer.style.display = "block";
+            progressBar.style.width = "0%";
+            resultsList.innerHTML = "";
+            exportBtn.style.display = "none";
+
+            fetch(`/auto/run_all?payload_id=${payloadId}`)
+                .then(resp => resp.json())
+                .then(data => {
+                    pollScoreboard(payloadId, progressBar, progressText, resultsList, exportBtn);
+                })
+                .catch(err => {
+                    alert("Erreur : " + err);
+                    testEnCours = false;
+                });
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            attachFormHandler("form-auto", "pid-auto", "auto");
-            attachFormHandler("form-headless", "pid-headless", "headless");
+            // Regular test form
+            document.getElementById("form-auto").addEventListener("submit", function(e) {
+                e.preventDefault();
+                const payloadId = document.getElementById("pid-auto").value;
+                runRegularTest(payloadId);
+            });
+            
+            // Headless test form with SSE
+            document.getElementById("form-headless").addEventListener("submit", function(e) {
+                e.preventDefault();
+                const payloadId = document.getElementById("pid-headless").value;
+                runHeadlessTestWithSSE(payloadId);
+            });
         });
     </script>
 </main>

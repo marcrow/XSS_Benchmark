@@ -2,7 +2,7 @@
 from flask import Blueprint, jsonify
 import time
 import requests
-from models import Scenario
+from models import Scenario, db  # Import db for committing status updates
 # Si vous avez un config ou quelque chose pour connaître l'adresse locale
 
 auto_test_bp = Blueprint('auto_test_bp', __name__)
@@ -41,6 +41,12 @@ def run_all_scenarios():
                 "url_visited": scenario_url,
                 "status": status
             })
+            
+            # Update scenario status in DB for progress tracking
+            if hasattr(s, "status"):
+                s.status = "ok" if status == 200 else f"error_{status}"
+                db.session.commit()
+                
             # Attendre un peu si besoin que le XSS se déclenche
             time.sleep(0.5)  
         except Exception as e:
@@ -50,6 +56,11 @@ def run_all_scenarios():
                 "url_visited": scenario_url,
                 "error": str(e)
             })
+            
+            # Update scenario status in DB for progress tracking
+            if hasattr(s, "status"):
+                s.status = "error"
+                db.session.commit()
 
     # Ensuite, on peut récupérer le scoreboard en JSON
     scoreboard_url = f"{base_url}/results/scoreboard"

@@ -36,23 +36,53 @@ def report_xss():
 
 
 @results_bp.route('/scoreboard', methods=['GET'])
-@results_bp.route('/scoreboard', methods=['GET'])
 def scoreboard():
     """
     Retourne les enregistrements de la table Results en JSON.
+    Affiche aussi les scénarios "pending" (pas encore de résultat pour ce payload).
     """
-    results = Result.query.all()
+    payload_id = request.args.get('payload_id', type=int)
+    # Si pas de payload_id, fallback à l'ancien comportement (tous les résultats)
+    if not payload_id:
+        results = Result.query.all()
+        data = []
+        for r in results:
+            data.append({
+                "scenario_id": r.scenario_id,
+                "scenario_name": r.scenario.name if r.scenario else "",
+                "payload_id": r.payload_id,
+                "payload_size": r.payload.size if r.payload else 0,
+                "status": "done" if r.triggered else "not_triggered",
+                "triggered": "Yes" if r.triggered else "No",
+                "regex_matches": r.regex_matches,
+                "test_timestamp": r.test_timestamp.isoformat() if r.test_timestamp else ""
+            })
+        return jsonify(data)
+
+    # Sinon, on veut le scoreboard pour un payload précis
+    scenarios = Scenario.query.all()
     data = []
-    for r in results:
+    for s in scenarios:
+        result = Result.query.filter_by(scenario_id=s.id, payload_id=payload_id).first()
+        if result:
+            status = "done" if result.triggered else "not_triggered"
+            triggered = "Yes" if result.triggered else "No"
+            regex_matches = result.regex_matches
+            test_timestamp = result.test_timestamp.isoformat() if result.test_timestamp else ""
+        else:
+            status = "pending"
+            triggered = "Pending"
+            regex_matches = 0
+            test_timestamp = ""
         data.append({
-            "scenario_id": r.scenario_id,
-            "scenario_name": r.scenario.name if r.scenario else "",
-            "payload_id": r.payload_id,
-            "payload_size": r.payload.size if r.payload else 0,
-            # On peut convertir le booléen triggered en string:
-            "triggered": "Yes" if r.triggered else "No",
-            "regex_matches": r.regex_matches,
-            "test_timestamp": r.test_timestamp.isoformat() if r.test_timestamp else ""
+            "scenario_id": s.id,
+            "scenario_name": s.name,
+            "payload_id": payload_id,
+            "payload_size": Payload.query.get(payload_id).size if Payload.query.get(payload_id) else 0,
+            "status": status,
+            "triggered": triggered,
+            "regex_matches": regex_matches,
+            "test_timestamp": test_timestamp
         })
     return jsonify(data)
 

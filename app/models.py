@@ -6,6 +6,7 @@ class Scenario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
     description = db.Column(db.Text)
+    status = db.Column(db.String(32), default="pending")  # Added for progress tracking
     # On peut ajouter d'autres champs (type, etc.)
 
 class Payload(db.Model):

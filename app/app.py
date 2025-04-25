@@ -1,8 +1,14 @@
+import time
+from sqlalchemy.exc import OperationalError
+
 from flask import Flask, render_template
 from config import config
 from db import init_db
 from models import db, Scenario
 from scenarios.basic_scenarios import basic_scenarios
+
+MAX_DB_RETRIES = 15
+RETRY_DELAY = 2  # seconds
 
 # Import des blueprints
 from controllers.scenarios_controller import scenarios_bp
@@ -17,7 +23,18 @@ from controllers.headless_test_controller import headless_test_bp
 
 def create_app():
     app = Flask(__name__)
-    init_db(app)
+    
+    # Retry logic for DB initialization
+    for attempt in range(1, MAX_DB_RETRIES + 1):
+        try:
+            init_db(app)
+            break
+        except OperationalError as e:
+            print(f"[DB INIT] Attempt {attempt}/{MAX_DB_RETRIES} failed: {e}")
+            if attempt == MAX_DB_RETRIES:
+                print("[DB INIT] Max retries reached. Exiting.")
+                raise
+            time.sleep(RETRY_DELAY)
 
     app.config["SERVER_NAME"] = "xsslab_app:9090"
 
