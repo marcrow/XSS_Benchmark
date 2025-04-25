@@ -24,8 +24,9 @@ services:
       - DB_NAME=xsslab
       - DB_USER=xssuser
       - DB_PASSWORD=secret
-    # volumes:
-    #   - ./:/app  # Optionnel si on veut faire du dev local
+    volumes:
+      - ./app:/app  # Optionnel si on veut faire du dev local
+      
     networks:
       - xsslab_net
 

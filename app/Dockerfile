@@ -14,7 +14,7 @@ RUN pip install playwright && playwright install
 
 WORKDIR /app
 # Copier le code
-COPY . /app
+# COPY . /app
 
 # Installer dépendances Python
 COPY requirements.txt .
