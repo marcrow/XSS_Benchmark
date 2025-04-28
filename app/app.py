@@ -6,7 +6,6 @@ from flask import Flask, render_template
 from config import config
 from db import db  # Import the single SQLAlchemy instance
 from models import Scenario, Payload
-from scenarios.basic_scenarios import basic_scenarios
 from scenarios.sync import sync_scenarios_to_db
 
 MAX_DB_RETRIES = 15

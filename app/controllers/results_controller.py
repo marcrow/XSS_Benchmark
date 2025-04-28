@@ -120,21 +120,23 @@ def report_markdown():
 
     results = Result.query.filter_by(payload_id=payload_id).all()
     if not results:
-        return "Aucun résultat pour ce payload", 404
+        return "No result for this payload", 404
 
     payload = Payload.query.get(payload_id)
     total = len(results)
     triggered = sum(1 for r in results if r.triggered)
 
     lines = []
-    lines.append(f"# Rapport XSS - Payload #{payload_id}")
+    lines.append(f"# bXSS Report - Payload #{payload_id}")
     lines.append(f"**Date :** {datetime.datetime.utcnow().isoformat()}")
     lines.append(f"**Payload :** `{payload.content}`")
-    lines.append(f"**Score global :** {triggered} / {total} ({round(triggered/total*100)}%)")
-    lines.append(f"**Taille :** {payload.size} caractères\n")
+    lines.append(f"**Score :** {triggered} / {total} ({round(triggered/total*100)}%)")
+    lines.append(f"**Length :** {payload.size}")
+    lines.append(f"**Number of regex triggers by the payload (less is better):** {results[0].regex_matches}\n")
 
-    lines.append("## Détail des scénarios")
-    lines.append("|Scenario|ID|Déclenché|Regex Match|Timestamp|")
+
+    lines.append("## Scenarios details")
+    lines.append("|Scenario|ID|Triggered|Regex Match|Timestamp|")
     lines.append("|---|---|---|---|---|")
 
     for r in results:
