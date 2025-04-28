@@ -1,5 +1,5 @@
 from flask import Blueprint, request, redirect, url_for, render_template
-from models import Payload, db
+from models import Payload, Result, Scenario, db
 import re
 
 payloads_bp = Blueprint('payloads_bp', __name__)
@@ -46,7 +46,22 @@ def upload_file():
 @payloads_bp.route('/payloads', methods=['GET'])
 def list_payloads():
     payloads = Payload.query.order_by(Payload.id.asc()).all()
-    payloads_data = [{"id": p.id, "payload": p.content} for p in payloads]
+    nb_scenarios = Scenario.query.count()
+    payloads_data = []
+    for p in payloads:
+        # Count results with triggered=True for this payload
+        nb_triggered = Result.query.filter_by(payload_id=p.id, triggered=True).count()
+        # Check if any test exists for this payload
+        test_exists = Result.query.filter_by(payload_id=p.id).count() > 0
+        score = f"{nb_triggered}/{nb_scenarios}" if nb_scenarios > 0 else "0/0"
+        report_link = url_for('results_bp.report_markdown', payload_id=p.id) if test_exists else "#"
+        payloads_data.append({
+            "id": p.id,
+            "payload": p.content,
+            "score": score,
+            "report_link": report_link,
+            "test_exists": test_exists
+        })
     return render_template("payloads.html", payloads=payloads_data)
 
 def detect_regex(payload_content: str) -> int:

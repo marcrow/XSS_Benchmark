@@ -34,7 +34,7 @@ def run_headless_tests(payload_id, session_id, app):
                     url = f"http://xsslab_app:9090/scenario/{s.id}?payload_id={payload_id}"
                     print(f"[+] Visiting: {url}")
                     page.goto(url)
-                    page.wait_for_timeout(1500)  # attendre exécution JS
+                    page.wait_for_timeout(2500)  # attendre exécution JS
 
                     visited.append({
                         "scenario_id": s.id,

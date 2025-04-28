@@ -5,6 +5,31 @@ import datetime
 
 results_bp = Blueprint('results_bp', __name__)
 
+@results_bp.route('/report_not_triggered', methods=['POST'])
+def report_not_triggered():
+    """
+    Endpoint to log that a scenario/payload did NOT trigger XSS.
+    Expects scenario_id and payload_id as POST data.
+    """
+    scenario_id = request.form.get('scenario_id', type=int)
+    payload_id = request.form.get('payload_id', type=int)
+    if not scenario_id or not payload_id:
+        return "Missing parameters", 400
+
+    # Check if a result already exists
+    result = Result.query.filter_by(scenario_id=scenario_id, payload_id=payload_id).first()
+    if not result:
+        result = Result(scenario_id=scenario_id, payload_id=payload_id)
+    
+    result.triggered = False
+    result.test_timestamp = datetime.datetime.utcnow()
+    result.regex_matches = 0
+    
+    db.session.add(result)
+    db.session.commit()
+    
+    return "Not triggered logged", 200
+
 @results_bp.route('/report', methods=['GET', 'POST'])
 def report_xss():
     """

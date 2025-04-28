@@ -20,6 +20,8 @@
                 <tr>
                     <th style="text-align:left; padding: 8px; border-bottom: 2px solid #ccc;">ID</th>
                     <th style="text-align:left; padding: 8px; border-bottom: 2px solid #ccc;">Payload (HTML-escaped)</th>
+                    <th style="text-align:left; padding: 8px; border-bottom: 2px solid #ccc;">Score</th>
+                    <th style="text-align:left; padding: 8px; border-bottom: 2px solid #ccc;">Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,10 +31,24 @@
                     <td style="padding: 8px; border-bottom: 1px solid #eee;">
                         <code>{{ p.payload|e }}</code>
                     </td>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">
+                        {% if p.score is not none %}
+                            {{ p.score }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td style="padding: 8px; border-bottom: 1px solid #eee;">
+                        <a href="{{ p.report_link }}" target="_blank">
+                            <button {% if not p.test_exists %}disabled{% endif %}>
+                                Report
+                            </button>
+                        </a>
+                    </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="2" style="padding: 8px; color: #888;">No payloads found.</td>
+                    <td colspan="4" style="padding: 8px; color: #888;">No payloads found.</td>
                 </tr>
                 {% endfor %}
             </tbody>

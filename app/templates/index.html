@@ -68,6 +68,7 @@
             );
         }
 
+
         function updateResultsList(payloadId, allResults, resultsList) {
             let handled = 0;
             let total = allResults.length;
@@ -162,7 +163,7 @@
                             fetch(`/results/scoreboard?payload_id=${payloadId}`)
                                 .then(r => r.json())
                                 .then(allResults => {
-                                    updateResultsList(payloadId, allResults, resultsList);
+                                    const { handled, total, hasPending } = updateResultsList(payloadId, allResults, resultsList);
                                     exportBtn.href = `/results/report_md?payload_id=${payloadId}`;
                                     exportBtn.style.display = "inline-block";
                                     testEnCours = false;

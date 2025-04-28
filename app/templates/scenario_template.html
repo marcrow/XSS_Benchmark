@@ -6,37 +6,66 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-        <!-- Balise script pour envoyer un beacon en cas d'exécution -->
+        <!-- Script to report XSS execution or non-execution -->
         <script>
-            function notifyXSS() {
-              fetch("{{ url_for('results_bp.report_xss', _external=True) }}?scenario_id={{ scenario.id }}&payload_id={{ payload.id if payload else 0 }}")
-                .then(r => console.log("XSS reported"))
-                .catch(e => console.error("Report failed", e));
+            let xssReported = false;
+            let notTriggeredTimeout = null;
+            
+            function reportTriggered() {
+                if (xssReported) return; // Prevent double reporting
+                xssReported = true;
+                if (notTriggeredTimeout) clearTimeout(notTriggeredTimeout);
+                
+                fetch("{{ url_for('results_bp.report_xss', _external=True) }}?scenario_id={{ scenario.id }}&payload_id={{ payload.id if payload else 0 }}")
+                    .then(r => console.log("XSS triggered reported"))
+                    .catch(e => console.error("Triggered report failed", e));
             }
-        
-            // Surcharge de console.log pour détecter "x" dans les arguments
+            
+            function reportNotTriggered() {
+                if (xssReported) return; // Prevent double reporting
+                xssReported = true;
+                
+                fetch("{{ url_for('results_bp.report_not_triggered', _external=True) }}", {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: `scenario_id={{ scenario.id }}&payload_id={{ payload.id if payload else 0 }}`
+                })
+                .then(r => console.log("XSS not triggered reported"))
+                .catch(e => console.error("Not triggered report failed", e));
+            }
+            
+            // Main function to notify XSS detection
+            function notifyXSS() {
+                reportTriggered();
+            }
+            
+            // Override console.log to detect "x" in arguments
             const originalConsoleLog = console.log;
             console.log = function(...args) {
-              // On concatène tous les arguments en une chaîne
-              const message = args.join(' ');
-              // S'il y a la lettre "x", on déclenche notifyXSS()
-              if (message.includes('x')) {
-                notifyXSS();
-              }
-              // On appelle le vrai console.log
-              originalConsoleLog.apply(console, args);
+                // Concatenate all arguments into a string
+                const message = args.join(' ');
+                // If there's the letter "x", trigger notifyXSS()
+                if (message.includes('x')) {
+                    reportTriggered();
+                }
+                // Call the real console.log
+                originalConsoleLog.apply(console, args);
             };
-        
-            // Surcharge de window.alert pour détecter si on lance une alerte
+            
+            // Override window.alert to detect any alert
             const originalAlert = window.alert;
             window.alert = function(msg) {
-              // Ici, on déclenche notifyXSS() sur toute alerte
-              // (ou seulement si msg contient "x" si vous voulez)
-              notifyXSS();
-        
-              // On appelle le vrai alert
-              originalAlert(msg);
+                // Trigger reportTriggered() on any alert
+                reportTriggered();
+                
+                // Call the real alert
+                originalAlert(msg);
             };
+            
+            // Start the 3-second timer on page load
+            window.addEventListener('DOMContentLoaded', function() {
+                notTriggeredTimeout = setTimeout(reportNotTriggered, 2000);
+            });
         </script>
     <h2>{{ scenario.name }}</h2>
     <p><strong>Description:</strong> {{ scenario.description }}</p>

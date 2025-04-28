@@ -6,8 +6,8 @@ scenarios_bp = Blueprint('scenarios_bp', __name__)
 
 @scenarios_bp.route('/scenarios', methods=['GET'])
 def list_scenarios():
-    # Récupérer en base
-    scenarios = Scenario.query.all()
+    # Récupérer en base et ordonner par ID
+    scenarios = Scenario.query.order_by(Scenario.id.asc()).all()
     return render_template("scenarios_list.html", scenarios=scenarios)
 
 @scenarios_bp.route('/scenario/<int:scenario_id>', methods=['GET'])
