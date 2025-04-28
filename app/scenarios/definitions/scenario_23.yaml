@@ -1,0 +1,11 @@
+id: 23
+name: "Scenario 23 - div onmouseenter with variable"
+description: "Payload used inside JS event as a variable"
+category: "Basic HTML"
+template_block: "div_onmouseenter_block"
+html_snippet: |
+  <div onmouseenter="let user = '{{ payload }}'; console.log(user)"></div>
+js_snippet: |
+  // No custom JS
+
+

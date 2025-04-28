@@ -1,0 +1,11 @@
+id: 30
+name: "Scenario 30 - strong tag inside header"
+description: "Injection inside strong tag in h1"
+category: "Basic HTML"
+template_block: "h1_strong_block"
+html_snippet: |
+  <h1>Welcome <strong>{{ payload }}</strong></h1>
+js_snippet: |
+  // No custom JS
+
+

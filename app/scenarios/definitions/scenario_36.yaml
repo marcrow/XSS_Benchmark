@@ -1,0 +1,11 @@
+id: 36
+name: "Scenario 36 - download attribute"
+description: "Payload in anchor download attribute"
+category: "Basic HTML"
+template_block: "a_download_block"
+html_snippet: |
+  <a href="/file" download="{{ payload }}">Download</a>
+js_snippet: |
+  // No custom JS
+
+

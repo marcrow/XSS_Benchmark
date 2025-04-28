@@ -1,0 +1,11 @@
+id: 29
+name: "Scenario 29 - button data-attribute"
+description: "Payload inside a data attribute"
+category: "Basic HTML"
+template_block: "button_data_block"
+html_snippet: |
+  <button data-token="{{ payload }}">Send</button>
+js_snippet: |
+  // No custom JS
+
+

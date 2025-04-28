@@ -1,0 +1,11 @@
+id: 22
+name: "Scenario 22 - svg filename title"
+description: "Injection inside an SVG title element (e.g. profile image filename)"
+category: "Basic HTML"
+template_block: "svg_title_block"
+html_snippet: |
+  <svg><title>{{ payload }}</title></svg>
+js_snippet: |
+  // No custom JS
+
+

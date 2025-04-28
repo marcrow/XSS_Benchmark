@@ -1,0 +1,11 @@
+id: 40
+name: "Scenario 40 - profile image filename in figcaption"
+description: "Payload inside <figcaption> for image name"
+category: "Basic HTML"
+template_block: "figcaption_block"
+html_snippet: |
+  <figure><img src="user.svg"><figcaption>{{ payload }}</figcaption></figure>
+js_snippet: |
+  // No custom JS
+
+

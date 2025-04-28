@@ -1,0 +1,11 @@
+id: 48
+name: "Scenario 48 - iframe title"
+description: "Payload in iframe title attribute"
+category: "Basic HTML"
+template_block: "iframe_title_block"
+html_snippet: |
+  <iframe src="x" title="{{ payload }}"></iframe>
+js_snippet: |
+  // No custom JS
+
+

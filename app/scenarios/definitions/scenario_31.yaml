@@ -1,0 +1,11 @@
+id: 31
+name: "Scenario 31 - onclick inside link"
+description: "Injection in onclick of <a> tag"
+category: "Basic HTML"
+template_block: "a_onclick_block"
+html_snippet: |
+  <a href="#" onclick="{{ payload }}">Click</a>
+js_snippet: |
+  // No custom JS
+
+

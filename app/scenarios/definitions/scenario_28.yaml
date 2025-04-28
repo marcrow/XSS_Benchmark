@@ -1,0 +1,11 @@
+id: 28
+name: "Scenario 28 - b tag nested in li"
+description: "Injection inside a <b> tag in a list item"
+category: "Basic HTML"
+template_block: "li_b_block"
+html_snippet: |
+  <ul><li><b>{{ payload }}</b></li></ul>
+js_snippet: |
+  // No custom JS
+
+

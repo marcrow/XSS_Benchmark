@@ -20,11 +20,22 @@ def sync_scenarios():
 @scenarios_bp.route('/scenario/<int:scenario_id>', methods=['GET'])
 def show_scenario(scenario_id):
     scenario = Scenario.query.get(scenario_id)
+    payload = Payload
     if not scenario:
         abort(404, "Scenario not found")
     
     payload_id = request.args.get('payload_id', type=int)
-    payload = Payload.query.get(payload_id) if payload_id else None
+
+    print("coucou")
+    if not payload_id:
+        if request.args.get('payload'):
+            Payload.content = request.args.get('payload')
+            Payload.size = len(Payload.content)
+            Payload.id=0
+        else :
+            abort(400, "Please provide a 'payload_id' or 'payload' parameter.")
+    else:
+        payload = Payload.query.get(payload_id) if payload_id else None
     
     return render_template(
         "scenario_template.html",

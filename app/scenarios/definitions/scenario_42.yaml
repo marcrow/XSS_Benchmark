@@ -1,0 +1,11 @@
+id: 42
+name: "Scenario 42 - inside template tag"
+description: "Payload rendered in <template>"
+category: "Basic HTML"
+template_block: "template_block"
+html_snippet: |
+  <template>{{ payload }}</template>
+js_snippet: |
+  // No custom JS
+
+

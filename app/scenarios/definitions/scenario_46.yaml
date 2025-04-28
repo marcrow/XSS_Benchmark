@@ -1,0 +1,11 @@
+id: 46
+name: "Scenario 46 - onclick with variable scope"
+description: "Payload used in onclick inside string assignment"
+category: "Basic HTML"
+template_block: "div_onclick_var_block"
+html_snippet: |
+  <div onclick="let t='{{ payload }}';void(0);">Run</div>
+js_snippet: |
+  // No custom JS
+
+

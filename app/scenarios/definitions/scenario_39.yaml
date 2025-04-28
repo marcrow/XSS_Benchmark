@@ -1,0 +1,11 @@
+id: 39
+name: "Scenario 39 - label for input"
+description: "Payload inside label text"
+category: "Basic HTML"
+template_block: "label_block"
+html_snippet: |
+  <label for="x">{{ payload }}</label>
+js_snippet: |
+  // No custom JS
+
+

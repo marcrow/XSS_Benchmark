@@ -1,4 +1,4 @@
-# XSS Benchmark
+# bXSS Benchmark
 
 ## Objective
 
@@ -53,6 +53,13 @@ JavaScript://%250Aalert?.(1)// '/*\'/*"/*\"/*`/*\`/*%26apos;)/*<!--> </Title/</S
 "><svg/onload=eval(atob('YWxlcnQoImJ4c3MiKQ=='))>// 
 
 ```
+
+### Manual tests
+You want to improve your payload and modify it manually?
+1. Go to the Scenarios page
+2. Click on the scenario you want to test.
+3. In the url add "?payload=" followed by your payload
+4. Press enter :)
 
 ---
 
@@ -125,6 +132,4 @@ For questions or support, please open an issue or contact the maintainer.
 
 ## TBD
 Add more scenario
-fix delay when xss is triggered
-feature inject manually via parameter
-edit report -> regex match shouldn't be in the Scenario detail.
+

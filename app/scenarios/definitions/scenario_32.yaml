@@ -1,0 +1,11 @@
+id: 32
+name: "Scenario 32 - inside noscript tag"
+description: "Payload inside <noscript>"
+category: "Basic HTML"
+template_block: "noscript_block"
+html_snippet: |
+  <noscript>{{ payload }}</noscript>
+js_snippet: |
+  // No custom JS
+
+

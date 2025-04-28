@@ -1,0 +1,11 @@
+id: 47
+name: "Scenario 47 - pre block"
+description: "Payload in a <pre> block"
+category: "Basic HTML"
+template_block: "pre_block"
+html_snippet: |
+  <pre>{{ payload }}</pre>
+js_snippet: |
+  // No custom JS
+
+

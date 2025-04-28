@@ -1,0 +1,11 @@
+id: 35
+name: "Scenario 35 - email field value"
+description: "Payload in a profile email field"
+category: "Basic HTML"
+template_block: "input_email_block"
+html_snippet: |
+  <input type="email" value="{{ payload }}">
+js_snippet: |
+  // No custom JS
+
+

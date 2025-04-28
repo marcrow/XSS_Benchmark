@@ -1,244 +1,359 @@
-<!-- scenario_01.yaml -->
-id: 1
-name: "Scenario 1 - <p> block"
-description: "Injection into a <p> tag"
+---
+<!-- scenario_21.yaml -->
+id: 21
+name: "Scenario 21 - nested div span injection"
+description: "Injection inside a nested <div><span> context"
 category: "Basic HTML"
-template_block: "p_block"
+template_block: "nested_div_span_block"
 html_snippet: |
-  <p>{{ payload }}</p>
+  <div><span>{{ payload }}</span></div>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_02.yaml -->
-id: 2
-name: "Scenario 2 - img onmouseover"
-description: "Injection into an image's onmouseover attribute"
+<!-- scenario_22.yaml -->
+id: 22
+name: "Scenario 22 - svg filename title"
+description: "Injection inside an SVG title element (e.g. profile image filename)"
 category: "Basic HTML"
-template_block: "img_onmouseover_block"
+template_block: "svg_title_block"
 html_snippet: |
-  <img src="#" onmouseover="{{ payload }}">
+  <svg><title>{{ payload }}</title></svg>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_03.yaml -->
-id: 3
-name: "Scenario 3 - script inline"
-description: "Injection into an inline script"
+<!-- scenario_23.yaml -->
+id: 23
+name: "Scenario 23 - div onmouseenter with variable"
+description: "Payload used inside JS event as a variable"
 category: "Basic HTML"
-template_block: "script_inline_block"
+template_block: "div_onmouseenter_block"
 html_snippet: |
-  <script>
-  {{ payload }}
-  </script>
+  <div onmouseenter="let user = '{{ payload }}'; console.log(user)"></div>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_04.yaml -->
-id: 4
-name: "Scenario 4 - input hidden"
-description: "Injection into a hidden input value"
+<!-- scenario_24.yaml -->
+id: 24
+name: "Scenario 24 - lang attribute"
+description: "Injection inside the HTML lang attribute"
 category: "Basic HTML"
-template_block: "input_hidden_block"
+template_block: "html_lang_block"
 html_snippet: |
-  <input type="hidden" name="data" value="{{ payload }}">
+  <html lang="{{ payload }}">
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_05.yaml -->
-id: 5
-name: "Scenario 5 - img src"
-description: "Injection into an image src attribute"
+<!-- scenario_25.yaml -->
+id: 25
+name: "Scenario 25 - User-Agent meta tag"
+description: "Injection in meta tag that reflects User-Agent"
 category: "Basic HTML"
-template_block: "img_src_block"
+template_block: "meta_useragent_block"
 html_snippet: |
-  <img src="{{ payload }}">
+  <meta name="user-agent" content="{{ payload }}">
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_06.yaml -->
-id: 6
-name: "Scenario 6 - a href"
-description: "Injection into an anchor href attribute"
+<!-- scenario_26.yaml -->
+id: 26
+name: "Scenario 26 - profile bio div"
+description: "Injection in user profile bio rendered in a div"
 category: "Basic HTML"
-template_block: "a_href_block"
+template_block: "profile_bio_div_block"
 html_snippet: |
-  <a href="{{ payload }}">Click here</a>
+  <div class="user-bio">{{ payload }}</div>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_07.yaml -->
-id: 7
-name: "Scenario 7 - script src"
-description: "Injection into a script src attribute"
+<!-- scenario_27.yaml -->
+id: 27
+name: "Scenario 27 - input value"
+description: "Payload inserted into an input field value"
 category: "Basic HTML"
-template_block: "script_src_block"
+template_block: "input_value_block"
 html_snippet: |
-  <script src="{{ payload }}"></script>
+  <input type="text" value="{{ payload }}">
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_08.yaml -->
-id: 8
-name: "Scenario 8 - button onclick"
-description: "Injection into a button's onclick attribute"
+<!-- scenario_28.yaml -->
+id: 28
+name: "Scenario 28 - b tag nested in li"
+description: "Injection inside a <b> tag in a list item"
 category: "Basic HTML"
-template_block: "button_onclick_block"
+template_block: "li_b_block"
 html_snippet: |
-  <button onclick="{{ payload }}">Click me</button>
+  <ul><li><b>{{ payload }}</b></li></ul>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_09.yaml -->
-id: 9
-name: "Scenario 9 - textarea"
-description: "Injection into a textarea value"
+<!-- scenario_29.yaml -->
+id: 29
+name: "Scenario 29 - button data-attribute"
+description: "Payload inside a data attribute"
 category: "Basic HTML"
-template_block: "textarea_block"
+template_block: "button_data_block"
 html_snippet: |
-  <textarea>{{ payload }}</textarea>
+  <button data-token="{{ payload }}">Send</button>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_10.yaml -->
-id: 10
-name: "Scenario 10 - comment"
-description: "Injection into an HTML comment"
+<!-- scenario_30.yaml -->
+id: 30
+name: "Scenario 30 - strong tag inside header"
+description: "Injection inside strong tag in h1"
 category: "Basic HTML"
-template_block: "comment_block"
+template_block: "h1_strong_block"
 html_snippet: |
-  <!-- {{ payload }} -->
+  <h1>Welcome <strong>{{ payload }}</strong></h1>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_11.yaml -->
-id: 11
-name: "Scenario 11 - script JSON"
-description: "Injection into a JSON object in a script"
+<!-- scenario_31.yaml -->
+id: 31
+name: "Scenario 31 - onclick inside link"
+description: "Injection in onclick of <a> tag"
 category: "Basic HTML"
-template_block: "script_json_block"
+template_block: "a_onclick_block"
 html_snippet: |
-  <script>
-  var obj = {"callback": "{{ payload }}"};
-  </script>
+  <a href="#" onclick="{{ payload }}">Click</a>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_12.yaml -->
-id: 12
-name: "Scenario 12 - select option"
-description: "Injection into a select option value"
+<!-- scenario_32.yaml -->
+id: 32
+name: "Scenario 32 - inside noscript tag"
+description: "Payload inside <noscript>"
 category: "Basic HTML"
-template_block: "select_option_block"
+template_block: "noscript_block"
 html_snippet: |
-  <select><option value="{{ payload }}">Payload</option></select>
+  <noscript>{{ payload }}</noscript>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_13.yaml -->
-id: 13
-name: "Scenario 13 - div style"
-description: "Injection into a div style attribute"
+<!-- scenario_33.yaml -->
+id: 33
+name: "Scenario 33 - inside <code> block"
+description: "Payload shown in a code element"
 category: "Basic HTML"
-template_block: "div_style_block"
+template_block: "code_block"
 html_snippet: |
-  <div style="{{ payload }}">Styled</div>
+  <code>{{ payload }}</code>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_14.yaml -->
-id: 14
-name: "Scenario 14 - meta refresh"
-description: "Injection into a meta refresh URL"
+<!-- scenario_34.yaml -->
+id: 34
+name: "Scenario 34 - style tag content"
+description: "Payload inside <style> element"
 category: "Basic HTML"
-template_block: "meta_refresh_block"
+template_block: "style_block"
 html_snippet: |
-  <meta http-equiv="refresh" content="1;url={{ payload }}">
+  <style>{{ payload }}</style>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_15.yaml -->
-id: 15
-name: "Scenario 15 - title"
-description: "Injection into a page title"
+<!-- scenario_35.yaml -->
+id: 35
+name: "Scenario 35 - email field value"
+description: "Payload in a profile email field"
 category: "Basic HTML"
-template_block: "title_block"
+template_block: "input_email_block"
 html_snippet: |
-  <title>{{ payload }}</title>
+  <input type="email" value="{{ payload }}">
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_16.yaml -->
-id: 16
-name: "Scenario 16 - script var"
-description: "Injection into a JS variable in a script"
+<!-- scenario_36.yaml -->
+id: 36
+name: "Scenario 36 - download attribute"
+description: "Payload in anchor download attribute"
 category: "Basic HTML"
-template_block: "script_var_block"
+template_block: "a_download_block"
 html_snippet: |
-  <script>
-  var msg = "{{ payload }}";
-  </script>
+  <a href="/file" download="{{ payload }}">Download</a>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_17.yaml -->
-id: 17
-name: "Scenario 17 - div data attribute"
-description: "Injection into a div data-info attribute"
+<!-- scenario_37.yaml -->
+id: 37
+name: "Scenario 37 - img alt text"
+description: "Payload in image alt attribute"
 category: "Basic HTML"
-template_block: "div_data_block"
+template_block: "img_alt_block"
 html_snippet: |
-  <div data-info="{{ payload }}">Element</div>
+  <img src="user.jpg" alt="{{ payload }}">
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_18.yaml -->
-id: 18
-name: "Scenario 18 - table cell"
-description: "Injection into a table cell"
+<!-- scenario_38.yaml -->
+id: 38
+name: "Scenario 38 - aria-label"
+description: "Payload in aria-label attribute"
 category: "Basic HTML"
-template_block: "table_block"
+template_block: "aria_label_block"
 html_snippet: |
-  <table><tr><td>{{ payload }}</td></tr></table>
+  <button aria-label="{{ payload }}">Click</button>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_19.yaml -->
-id: 19
-name: "Scenario 19 - input placeholder"
-description: "Injection into an input placeholder"
+<!-- scenario_39.yaml -->
+id: 39
+name: "Scenario 39 - label for input"
+description: "Payload inside label text"
 category: "Basic HTML"
-template_block: "input_placeholder_block"
+template_block: "label_block"
 html_snippet: |
-  <input placeholder="{{ payload }}">
+  <label for="x">{{ payload }}</label>
 js_snippet: |
   // No custom JS
 
 ---
-<!-- scenario_20.yaml -->
-id: 20
-name: "Scenario 20 - iframe src"
-description: "Injection into an iframe src attribute"
+<!-- scenario_40.yaml -->
+id: 40
+name: "Scenario 40 - profile image filename in figcaption"
+description: "Payload inside <figcaption> for image name"
 category: "Basic HTML"
-template_block: "iframe_block"
+template_block: "figcaption_block"
 html_snippet: |
-  <iframe src="{{ payload }}"></iframe>
+  <figure><img src="user.svg"><figcaption>{{ payload }}</figcaption></figure>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_41.yaml -->
+id: 41
+name: "Scenario 41 - title attribute"
+description: "Payload in title tooltip"
+category: "Basic HTML"
+template_block: "div_title_attribute_block"
+html_snippet: |
+  <div title="{{ payload }}">Hover me</div>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_42.yaml -->
+id: 42
+name: "Scenario 42 - inside template tag"
+description: "Payload rendered in <template>"
+category: "Basic HTML"
+template_block: "template_block"
+html_snippet: |
+  <template>{{ payload }}</template>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_43.yaml -->
+id: 43
+name: "Scenario 43 - details summary tag"
+description: "Payload inside summary of a <details>"
+category: "Basic HTML"
+template_block: "details_summary_block"
+html_snippet: |
+  <details><summary>{{ payload }}</summary></details>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_44.yaml -->
+id: 44
+name: "Scenario 44 - injected inside span content"
+description: "Injection inside inline <span>"
+category: "Basic HTML"
+template_block: "span_block"
+html_snippet: |
+  <span>{{ payload }}</span>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_45.yaml -->
+id: 45
+name: "Scenario 45 - div class name"
+description: "Payload inserted as part of a class name"
+category: "Basic HTML"
+template_block: "div_classname_block"
+html_snippet: |
+  <div class="{{ payload }}">Test</div>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_46.yaml -->
+id: 46
+name: "Scenario 46 - onclick with variable scope"
+description: "Payload used in onclick inside string assignment"
+category: "Basic HTML"
+template_block: "div_onclick_var_block"
+html_snippet: |
+  <div onclick="let t='{{ payload }}';void(0);">Run</div>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_47.yaml -->
+id: 47
+name: "Scenario 47 - pre block"
+description: "Payload in a <pre> block"
+category: "Basic HTML"
+template_block: "pre_block"
+html_snippet: |
+  <pre>{{ payload }}</pre>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_48.yaml -->
+id: 48
+name: "Scenario 48 - iframe title"
+description: "Payload in iframe title attribute"
+category: "Basic HTML"
+template_block: "iframe_title_block"
+html_snippet: |
+  <iframe src="x" title="{{ payload }}"></iframe>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_49.yaml -->
+id: 49
+name: "Scenario 49 - injected inside hidden span"
+description: "Payload in a span with display:none"
+category: "Basic HTML"
+template_block: "span_hidden_block"
+html_snippet: |
+  <span style="display:none">{{ payload }}</span>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_50.yaml -->
+id: 50
+name: "Scenario 50 - JSON in textarea"
+description: "Payload as part of a JSON blob in <textarea>"
+category: "Basic HTML"
+template_block: "textarea_json_block"
+html_snippet: |
+  <textarea>{"user_input": "{{ payload }}"}</textarea>
 js_snippet: |
   // No custom JS

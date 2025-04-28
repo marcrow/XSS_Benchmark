@@ -1,0 +1,11 @@
+id: 45
+name: "Scenario 45 - div class name"
+description: "Payload inserted as part of a class name"
+category: "Basic HTML"
+template_block: "div_classname_block"
+html_snippet: |
+  <div class="{{ payload }}">Test</div>
+js_snippet: |
+  // No custom JS
+
+

@@ -1,0 +1,10 @@
+id: 50
+name: "Scenario 50 - JSON in textarea"
+description: "Payload as part of a JSON blob in <textarea>"
+category: "Basic HTML"
+template_block: "textarea_json_block"
+html_snippet: |
+  <textarea>{"user_input": "{{ payload }}"}</textarea>
+js_snippet: |
+  // No custom JS
+

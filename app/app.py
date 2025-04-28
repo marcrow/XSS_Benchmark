@@ -34,7 +34,7 @@ def create_app():
     app.register_blueprint(scenarios_bp)
     app.register_blueprint(payloads_bp, url_prefix='/payloads')
     app.register_blueprint(results_bp, url_prefix='/results')
-    app.register_blueprint(auto_test_bp, url_prefix='/auto')
+    # app.register_blueprint(auto_test_bp, url_prefix='/auto')
     app.register_blueprint(headless_test_bp, url_prefix='/auto_headless')
 
 

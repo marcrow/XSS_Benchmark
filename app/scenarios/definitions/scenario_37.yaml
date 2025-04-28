@@ -1,0 +1,11 @@
+id: 37
+name: "Scenario 37 - img alt text"
+description: "Payload in image alt attribute"
+category: "Basic HTML"
+template_block: "img_alt_block"
+html_snippet: |
+  <img src="user.jpg" alt="{{ payload }}">
+js_snippet: |
+  // No custom JS
+
+
