@@ -1,0 +1,13 @@
+id: 11
+name: "Scenario 11 - script JSON"
+description: "Injection into a JSON object in a script"
+category: "Basic HTML"
+template_block: "script_json_block"
+html_snippet: |
+  <script>
+  var obj = {"callback": "{{ payload }}"};
+  </script>
+js_snippet: |
+  // No custom JS
+
+

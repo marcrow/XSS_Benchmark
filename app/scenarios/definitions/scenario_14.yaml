@@ -1,0 +1,11 @@
+id: 14
+name: "Scenario 14 - meta refresh"
+description: "Injection into a meta refresh URL"
+category: "Basic HTML"
+template_block: "meta_refresh_block"
+html_snippet: |
+  <meta http-equiv="refresh" content="1;url={{ payload }}">
+js_snippet: |
+  // No custom JS
+
+

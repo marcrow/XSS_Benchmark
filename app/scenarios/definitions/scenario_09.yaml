@@ -1,0 +1,11 @@
+id: 9
+name: "Scenario 9 - textarea"
+description: "Injection into a textarea value"
+category: "Basic HTML"
+template_block: "textarea_block"
+html_snippet: |
+  <textarea>{{ payload }}</textarea>
+js_snippet: |
+  // No custom JS
+
+

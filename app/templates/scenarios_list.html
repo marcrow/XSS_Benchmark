@@ -13,6 +13,10 @@
 
 {% include "_menu.html" %}
 
+<form action="/scenarios/sync" method="post" style="margin-bottom: 20px;">
+    <button type="submit" class="btn">Sync YAML to DB</button>
+</form>
+
 <ul>
 {% for scenario in scenarios %}
     <li>
@@ -23,5 +27,15 @@
     </li>
 {% endfor %}
 </ul>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 </body>
 </html>

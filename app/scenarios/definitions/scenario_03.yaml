@@ -1,0 +1,13 @@
+id: 3
+name: "Scenario 3 - script inline"
+description: "Injection into an inline script"
+category: "Basic HTML"
+template_block: "script_inline_block"
+html_snippet: |
+  <script>
+  {{ payload }}
+  </script>
+js_snippet: |
+  // No custom JS
+
+

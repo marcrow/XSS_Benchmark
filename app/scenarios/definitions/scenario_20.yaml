@@ -1,0 +1,10 @@
+id: 20
+name: "Scenario 20 - iframe src"
+description: "Injection into an iframe src attribute"
+category: "Basic HTML"
+template_block: "iframe_block"
+html_snippet: |
+  <iframe src="{{ payload }}"></iframe>
+js_snippet: |
+  // No custom JS
+

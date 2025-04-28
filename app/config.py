@@ -1,6 +1,7 @@
 import os
 
 class Config:
+    SECRET_KEY = os.getenv('SECRET_KEY', 'dev_secret_change_me')
     DB_HOST = os.getenv('DB_HOST', 'localhost')
     DB_NAME = os.getenv('DB_NAME', 'xsslab')
     DB_USER = os.getenv('DB_USER', 'xssuser')

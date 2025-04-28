@@ -1,0 +1,11 @@
+id: 2
+name: "Scenario 2 - img onmouseover"
+description: "Injection into an image's onmouseover attribute"
+category: "Basic HTML"
+template_block: "img_onmouseover_block"
+html_snippet: |
+  <img src="#" onmouseover="{{ payload }}">
+js_snippet: |
+  // No custom JS
+
+

@@ -1,0 +1,11 @@
+id: 1
+name: "Scenario 1 - p block"
+description: "Injection into a p tag"
+category: "Basic HTML"
+template_block: "p_block"
+html_snippet: |
+  <p>{{ payload }}</p>
+js_snippet: |
+  // No custom JS
+
+

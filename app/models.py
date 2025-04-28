@@ -7,6 +7,8 @@ class Scenario(db.Model):
     name = db.Column(db.String(100), unique=True)
     description = db.Column(db.Text)
     status = db.Column(db.String(32), default="pending")  # Added for progress tracking
+    html_snippet = db.Column(db.Text)  # Added for scenario rendering
+    js_snippet = db.Column(db.Text)    # Added for scenario rendering
     # On peut ajouter d'autres champs (type, etc.)
 
 class Payload(db.Model):
@@ -21,8 +23,8 @@ class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     scenario_id = db.Column(db.Integer, db.ForeignKey('scenarios.id'))
     payload_id = db.Column(db.Integer, db.ForeignKey('payloads.id'))
-    triggered = db.Column(db.Boolean, default=False)  # XSS déclenché ?
-    regex_matches = db.Column(db.Integer, default=0)   # nb de patterns détectés
+    triggered = db.Column(db.Boolean, default=False)  
+    regex_matches = db.Column(db.Integer, default=0)   
     test_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     scenario = db.relationship('Scenario', backref='results')

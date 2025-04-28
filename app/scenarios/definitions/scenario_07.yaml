@@ -1,0 +1,11 @@
+id: 7
+name: "Scenario 7 - script src"
+description: "Injection into a script src attribute"
+category: "Basic HTML"
+template_block: "script_src_block"
+html_snippet: |
+  <script src="{{ payload }}"></script>
+js_snippet: |
+  // No custom JS
+
+

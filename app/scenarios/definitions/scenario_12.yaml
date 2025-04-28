@@ -1,0 +1,11 @@
+id: 12
+name: "Scenario 12 - select option"
+description: "Injection into a select option value"
+category: "Basic HTML"
+template_block: "select_option_block"
+html_snippet: |
+  <select><option value="{{ payload }}">Payload</option></select>
+js_snippet: |
+  // No custom JS
+
+

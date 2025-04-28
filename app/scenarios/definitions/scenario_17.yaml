@@ -1,0 +1,11 @@
+id: 17
+name: "Scenario 17 - div data attribute"
+description: "Injection into a div data-info attribute"
+category: "Basic HTML"
+template_block: "div_data_block"
+html_snippet: |
+  <div data-info="{{ payload }}">Element</div>
+js_snippet: |
+  // No custom JS
+
+

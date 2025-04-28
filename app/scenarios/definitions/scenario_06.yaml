@@ -1,0 +1,11 @@
+id: 6
+name: "Scenario 6 - a href"
+description: "Injection into an anchor href attribute"
+category: "Basic HTML"
+template_block: "a_href_block"
+html_snippet: |
+  <a href="{{ payload }}">Click here</a>
+js_snippet: |
+  // No custom JS
+
+

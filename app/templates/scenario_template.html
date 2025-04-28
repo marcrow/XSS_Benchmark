@@ -68,57 +68,19 @@
             });
         </script>
     <h2>{{ scenario.name }}</h2>
+    <p><strong>Category:</strong> {{ scenario.category }}</p>
     <p><strong>Description:</strong> {{ scenario.description }}</p>
 
-    {% if "Scenario 1" in scenario.name %}
-        <p>{{ payload.content|safe }}</p>
-    {% elif "Scenario 2" in scenario.name %}
-        <img src="#" onmouseover="{{ payload.content|safe }}">
-    {% elif "Scenario 3" in scenario.name %}
-        <script>
-        {{ payload.content|safe }}
-        </script>
-    {% elif "Scenario 4" in scenario.name %}
-        <input type="hidden" name="data" value="{{ payload.content|safe }}">
-    {% elif "Scenario 5" in scenario.name %}
-        <img src="{{ payload.content|safe }}">
-    {% elif "Scenario 6" in scenario.name %}
-        <a href="{{ payload.content|safe }}">Clique ici</a>
-    {% elif "Scenario 7" in scenario.name %}
-        <script src="{{ payload.content|safe }}"></script>
-    {% elif "Scenario 8" in scenario.name %}
-        <button onclick="{{ payload.content|safe }}">Click me</button>
-    {% elif "Scenario 9" in scenario.name %}
-        <textarea>{{ payload.content|safe }}</textarea>
-    {% elif "Scenario 10" in scenario.name %}
-        <!-- {{ payload.content|safe }} -->
-    {% elif "Scenario 11" in scenario.name %}
-        <script>
-        var obj = {"callback": "{{ payload.content|safe }}"};
-        </script>
-    {% elif "Scenario 12" in scenario.name %}
-        <select><option value="{{ payload.content|safe }}">Payload</option></select>
-    {% elif "Scenario 13" in scenario.name %}
-        <div style="{{ payload.content|safe }}">Stylé</div>
-    {% elif "Scenario 14" in scenario.name %}
-        <meta http-equiv="refresh" content="1;url={{ payload.content|safe }}">
-    {% elif "Scenario 15" in scenario.name %}
-        <title>{{ payload.content|safe }}</title>
-    {% elif "Scenario 16" in scenario.name %}
-        <script>
-        var msg = "{{ payload.content|safe }}";
-        </script>
-    {% elif "Scenario 17" in scenario.name %}
-        <div data-info="{{ payload.content|safe }}">Element</div>
-    {% elif "Scenario 18" in scenario.name %}
-        <table><tr><td>{{ payload.content|safe }}</td></tr></table>
-    {% elif "Scenario 19" in scenario.name %}
-        <input placeholder="{{ payload.content|safe }}">
-    {% elif "Scenario 20" in scenario.name %}
-        <iframe src="{{ payload.content|safe }}"></iframe>
+    {# Render the scenario's HTML snippet, injecting the payload #}
+    {% set snippet = scenario.html_snippet.replace("{{ payload }}", payload.content if payload else "") %}
+    {{ snippet | safe }}
+
+    {# Render the scenario's JS snippet, if any #}
+    {% if scenario.js_snippet and scenario.js_snippet.strip() %}
+    <script>
+    {{ scenario.js_snippet | safe }}
+    </script>
     {% endif %}
-
-
     
 </body>
 </html>

@@ -1,0 +1,11 @@
+id: 15
+name: "Scenario 15 - title"
+description: "Injection into a page title"
+category: "Basic HTML"
+template_block: "title_block"
+html_snippet: |
+  <title>{{ payload }}</title>
+js_snippet: |
+  // No custom JS
+
+

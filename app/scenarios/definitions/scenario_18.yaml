@@ -1,0 +1,11 @@
+id: 18
+name: "Scenario 18 - table cell"
+description: "Injection into a table cell"
+category: "Basic HTML"
+template_block: "table_block"
+html_snippet: |
+  <table><tr><td>{{ payload }}</td></tr></table>
+js_snippet: |
+  // No custom JS
+
+

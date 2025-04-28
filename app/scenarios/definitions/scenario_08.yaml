@@ -1,0 +1,11 @@
+id: 8
+name: "Scenario 8 - button onclick"
+description: "Injection into a button's onclick attribute"
+category: "Basic HTML"
+template_block: "button_onclick_block"
+html_snippet: |
+  <button onclick="{{ payload }}">Click me</button>
+js_snippet: |
+  // No custom JS
+
+

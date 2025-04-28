@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
-RUN pip install playwright && playwright install
+RUN pip install playwright pyyaml && playwright install
 
 WORKDIR /app
 # Copier le code

@@ -1,0 +1,11 @@
+id: 10
+name: "Scenario 10 - comment"
+description: "Injection into an HTML comment"
+category: "Basic HTML"
+template_block: "comment_block"
+html_snippet: |
+  <!-- {{ payload }} -->
+js_snippet: |
+  // No custom JS
+
+
