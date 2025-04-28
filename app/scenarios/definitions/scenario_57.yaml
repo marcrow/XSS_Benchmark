@@ -1,0 +1,12 @@
+id: 57
+name: "Scenario 57 - JSON.parse with payload"
+description: "Payload wrapped as JSON string and parsed"
+category: "JavaScript"
+template_block: "js_json_parse_block"
+html_snippet: |
+  <div>Parsing JSON</div>
+js_snippet: |
+  let obj = JSON.parse('{"key": "{{ payload }}"}');
+  console.log(obj.key);
+
+

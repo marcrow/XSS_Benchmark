@@ -1,0 +1,12 @@
+id: 64
+name: "Scenario 64 - createTextNode with payload"
+description: "Payload used in DOM text node"
+category: "JavaScript"
+template_block: "js_createtext_block"
+html_snippet: |
+  <div id="txt"></div>
+js_snippet: |
+  let node = document.createTextNode("{{ payload }}");
+  document.getElementById("txt").appendChild(node);
+
+

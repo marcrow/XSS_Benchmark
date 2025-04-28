@@ -26,7 +26,6 @@ def show_scenario(scenario_id):
     
     payload_id = request.args.get('payload_id', type=int)
 
-    print("coucou")
     if not payload_id:
         if request.args.get('payload'):
             Payload.content = request.args.get('payload')

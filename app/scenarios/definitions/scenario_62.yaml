@@ -1,0 +1,11 @@
+id: 62
+name: "Scenario 62 - href JS assignment"
+description: "Payload assigned to href attribute"
+category: "JavaScript"
+template_block: "js_href_assign_block"
+html_snippet: |
+  <a id="link">Link</a>
+js_snippet: |
+  document.getElementById("link").href = "{{ payload }}";
+
+

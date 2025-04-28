@@ -1,0 +1,11 @@
+id: 83
+name: "Scenario 83 - payload in localStorage key"
+description: "Payload used as key in localStorage"
+category: "JavaScript"
+template_block: "js_localstorage_key_block"
+html_snippet: |
+  <div>localStorage test</div>
+js_snippet: |
+  localStorage.setItem("{{ payload }}", "x");
+
+

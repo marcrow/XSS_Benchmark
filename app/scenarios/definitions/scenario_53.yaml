@@ -1,0 +1,12 @@
+id: 53
+name: "Scenario 53 - payload in new Function()"
+description: "Payload used in Function constructor"
+category: "JavaScript"
+template_block: "js_newfunction_block"
+html_snippet: |
+  <div>Running new Function...</div>
+js_snippet: |
+  let f = new Function("console.log('{{ payload }}')");
+  f();
+
+

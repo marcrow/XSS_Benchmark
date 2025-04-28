@@ -1,0 +1,14 @@
+id: 89
+name: "Scenario 89 - CSS selector via payload"
+description: "Payload used as a CSS selector string"
+category: "JavaScript"
+template_block: "js_queryselector_block"
+html_snippet: |
+  <div>CSS selector test</div>
+js_snippet: |
+  try {
+    document.querySelector("{{ payload }}");
+  } catch(e) {
+    console.log("Invalid selector");
+  }
+

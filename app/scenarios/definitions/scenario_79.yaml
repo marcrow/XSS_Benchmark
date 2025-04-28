@@ -1,0 +1,11 @@
+id: 79
+name: "Scenario 79 - payload in window.name"
+description: "Payload assigned to window.name"
+category: "JavaScript"
+template_block: "js_window_name_block"
+html_snippet: |
+  <div>Assigning to window.name</div>
+js_snippet: |
+  window.name = "{{ payload }}";
+
+

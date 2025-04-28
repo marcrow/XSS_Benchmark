@@ -1,0 +1,11 @@
+id: 60
+name: "Scenario 60 - document.write with payload"
+description: "Payload used inside document.write"
+category: "JavaScript"
+template_block: "js_docwrite_block"
+html_snippet: |
+  <div>Using document.write</div>
+js_snippet: |
+  document.write("{{ payload }}");
+
+

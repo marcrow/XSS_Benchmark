@@ -1,0 +1,11 @@
+id: 82
+name: "Scenario 82 - dynamic import() using payload"
+description: "Payload used as module path in dynamic import"
+category: "JavaScript"
+template_block: "js_dynamic_import_block"
+html_snippet: |
+  <div>Importing module</div>
+js_snippet: |
+  import("{{ payload }}").catch(e => console.error("import failed"));
+
+

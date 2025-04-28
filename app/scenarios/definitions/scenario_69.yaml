@@ -1,0 +1,11 @@
+id: 69
+name: "Scenario 69 - template innerHTML injection"
+description: "Payload in a <template> innerHTML"
+category: "JavaScript"
+template_block: "js_template_inner_block"
+html_snippet: |
+  <template id="tpl"></template>
+js_snippet: |
+  document.getElementById("tpl").innerHTML = "{{ payload }}";
+
+

@@ -1,0 +1,13 @@
+id: 59
+name: "Scenario 59 - payload as script.src"
+description: "Payload used as script src"
+category: "JavaScript"
+template_block: "js_script_src_block"
+html_snippet: |
+  <div>Loading script</div>
+js_snippet: |
+  let s = document.createElement("script");
+  s.src = "{{ payload }}";
+  document.head.appendChild(s);
+
+

@@ -1,0 +1,11 @@
+id: 74
+name: "Scenario 74 - payload as CSS in style.innerHTML"
+description: "Payload injected into <style> inner content"
+category: "JavaScript"
+template_block: "js_style_innerhtml_block"
+html_snippet: |
+  <style id="s1"></style>
+js_snippet: |
+  document.getElementById("s1").innerHTML = "{{ payload }}";
+
+

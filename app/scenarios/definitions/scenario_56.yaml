@@ -1,0 +1,11 @@
+id: 56
+name: "Scenario 56 - iframe.src via payload"
+description: "Payload assigned to iframe.src"
+category: "JavaScript"
+template_block: "js_iframe_src_block"
+html_snippet: |
+  <iframe id="i1"></iframe>
+js_snippet: |
+  document.getElementById("i1").src = "{{ payload }}";
+
+

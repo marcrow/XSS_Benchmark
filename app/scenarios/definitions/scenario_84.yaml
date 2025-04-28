@@ -1,0 +1,11 @@
+id: 84
+name: "Scenario 84 - payload in localStorage value"
+description: "Payload used as value in localStorage"
+category: "JavaScript"
+template_block: "js_localstorage_value_block"
+html_snippet: |
+  <div>localStorage value test</div>
+js_snippet: |
+  localStorage.setItem("key", "{{ payload }}");
+
+

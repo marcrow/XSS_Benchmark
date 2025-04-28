@@ -1,0 +1,13 @@
+id: 54
+name: "Scenario 54 - payload in script injection"
+description: "Script element created and payload assigned as content"
+category: "JavaScript"
+template_block: "js_create_script_block"
+html_snippet: |
+  <div>Injecting script element</div>
+js_snippet: |
+  let s = document.createElement("script");
+  s.textContent = "{{ payload }}";
+  document.body.appendChild(s);
+
+

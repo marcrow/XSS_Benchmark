@@ -1,0 +1,11 @@
+id: 63
+name: "Scenario 63 - innerText assignment"
+description: "Payload assigned to innerText"
+category: "JavaScript"
+template_block: "js_innertext_block"
+html_snippet: |
+  <div id="info"></div>
+js_snippet: |
+  document.getElementById("info").innerText = "{{ payload }}";
+
+

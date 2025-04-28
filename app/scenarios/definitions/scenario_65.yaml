@@ -1,0 +1,11 @@
+id: 65
+name: "Scenario 65 - array index with payload"
+description: "Payload used as array index"
+category: "JavaScript"
+template_block: "js_array_index_block"
+html_snippet: |
+  <div>Array lookup</div>
+js_snippet: |
+  let arr = []; arr["{{ payload }}"] = "t"; console.log(arr["{{ payload }}"]);
+
+

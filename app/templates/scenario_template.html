@@ -77,10 +77,12 @@
 
     {# Render the scenario's JS snippet, if any #}
     {% if scenario.js_snippet and scenario.js_snippet.strip() %}
+    {% set js_code = scenario.js_snippet.replace("{{ payload }}", payload.content if payload else "") %}
     <script>
-    {{ scenario.js_snippet | safe }}
+    {{ js_code | safe }}
     </script>
     {% endif %}
+    
     
 </body>
 </html>

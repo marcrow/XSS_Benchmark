@@ -1,0 +1,11 @@
+id: 75
+name: "Scenario 75 - className assignment"
+description: "Payload assigned to DOM className"
+category: "JavaScript"
+template_block: "js_classname_block"
+html_snippet: |
+  <div id="user"></div>
+js_snippet: |
+  document.getElementById("user").className = "{{ payload }}";
+
+

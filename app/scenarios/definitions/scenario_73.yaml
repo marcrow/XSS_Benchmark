@@ -1,0 +1,14 @@
+id: 73
+name: "Scenario 73 - dynamic link via createElement"
+description: "Anchor created and href set via payload"
+category: "JavaScript"
+template_block: "js_create_anchor_block"
+html_snippet: |
+  <div>Dynamic anchor</div>
+js_snippet: |
+  let a = document.createElement("a");
+  a.href = "{{ payload }}";
+  a.innerText = "Go";
+  document.body.appendChild(a);
+
+

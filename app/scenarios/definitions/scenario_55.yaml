@@ -1,0 +1,11 @@
+id: 55
+name: "Scenario 55 - innerHTML assignment"
+description: "Payload inserted into innerHTML of div"
+category: "JavaScript"
+template_block: "js_innerhtml_block"
+html_snippet: |
+  <div id="xssTarget"></div>
+js_snippet: |
+  document.getElementById("xssTarget").innerHTML = "{{ payload }}";
+
+

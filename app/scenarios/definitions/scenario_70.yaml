@@ -1,0 +1,11 @@
+id: 70
+name: "Scenario 70 - payload inside setInterval"
+description: "Payload evaluated via setInterval"
+category: "JavaScript"
+template_block: "js_setinterval_block"
+html_snippet: |
+  <div>Testing setInterval</div>
+js_snippet: |
+  setInterval("console.log('{{ payload }}')", 1000);
+
+

@@ -1,0 +1,11 @@
+id: 61
+name: "Scenario 61 - onclick dynamic assignment"
+description: "Payload as onclick handler via JS"
+category: "JavaScript"
+template_block: "js_onclick_assign_block"
+html_snippet: |
+  <button id="b1">Click</button>
+js_snippet: |
+  document.getElementById("b1").setAttribute("onclick", "{{ payload }}");
+
+

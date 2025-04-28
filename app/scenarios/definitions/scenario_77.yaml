@@ -1,0 +1,11 @@
+id: 77
+name: "Scenario 77 - payload via history.pushState"
+description: "Payload used in pushState URL"
+category: "JavaScript"
+template_block: "js_pushstate_block"
+html_snippet: |
+  <div>History manipulation</div>
+js_snippet: |
+  history.pushState({}, "", "{{ payload }}");
+
+

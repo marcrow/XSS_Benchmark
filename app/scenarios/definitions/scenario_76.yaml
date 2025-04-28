@@ -1,0 +1,11 @@
+id: 76
+name: "Scenario 76 - data-* attribute via dataset"
+description: "Payload used in dataset property"
+category: "JavaScript"
+template_block: "js_dataset_block"
+html_snippet: |
+  <div id="target"></div>
+js_snippet: |
+  document.getElementById("target").dataset.info = "{{ payload }}";
+
+

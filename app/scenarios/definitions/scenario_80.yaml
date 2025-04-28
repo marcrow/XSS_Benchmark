@@ -1,0 +1,13 @@
+id: 80
+name: "Scenario 80 - URLSearchParams with payload"
+description: "Payload used in URLSearchParams"
+category: "JavaScript"
+template_block: "js_urlparams_block"
+html_snippet: |
+  <div>URLSearchParams test</div>
+js_snippet: |
+  let url = new URL("https://example.com");
+  url.searchParams.set("x", "{{ payload }}");
+  console.log(url.toString());
+
+

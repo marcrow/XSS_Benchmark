@@ -1,0 +1,11 @@
+id: 72
+name: "Scenario 72 - payload in dynamic form action"
+description: "Payload as form action target"
+category: "JavaScript"
+template_block: "js_form_action_block"
+html_snippet: |
+  <form id="f1" method="get"></form>
+js_snippet: |
+  document.getElementById("f1").action = "{{ payload }}";
+
+

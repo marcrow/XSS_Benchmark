@@ -1,0 +1,12 @@
+id: 85
+name: "Scenario 85 - payload in postMessage"
+description: "Payload posted via postMessage"
+category: "JavaScript"
+template_block: "js_postmessage_block"
+html_snippet: |
+  <iframe id="targetFrame"></iframe>
+js_snippet: |
+  let frame = document.getElementById("targetFrame").contentWindow;
+  frame.postMessage("{{ payload }}", "*");
+
+
