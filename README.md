@@ -1,5 +1,7 @@
 # bXSS Benchmark
 
+![alt text](img/-bxss--is-centered-and-dark-blue.png)
+
 ## Objective
 
 **XSS Benchmark** is a web application designed to evaluate and benchmark the effectiveness of XSS (Cross-Site Scripting) payloads against a variety of real-world scenarios. It provides a structured environment for security researchers and developers to test, compare, and analyze payloads in different contexts, helping to improve web application security.
