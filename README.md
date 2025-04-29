@@ -4,7 +4,13 @@
 
 ## Objective
 
-**bXSS Benchmark** is a web application designed to evaluate and benchmark the effectiveness of XSS (Cross-Site Scripting) payloads against a variety of real-world scenarios. It provides a structured environment for security researchers and developers to test, compare, and analyze payloads in different contexts, helping to improve web application security.
+**bXSS Benchmark** is a web application designed to evaluate and benchmark the effectiveness of blind XSS (Cross-Site Scripting) polyglot payloads against a variety of real-world scenarios. It provides a structured environment for security researchers and developers to test, compare, and analyze payloads in different contexts, helping to improve web application security. It also can be use to train your XSS skills.
+
+As the XSS gym training developed by brutelogic is no longer accessible, this project is a local alternative. I try to integrated his previous scenario as reference, but this integration isn't fully finnished.
+
+It is a side project, do not hesitate to report issues. I will try to fix them as soon as possible !
+
+PS: I would not recommend to expose this app pubicly, no security measures have been deployed and the app is still under development. 
 
 ---
 
@@ -86,12 +92,12 @@ You want to improve your payload and modify it manually?
 
 3. **Verify Scenario Loading**
 
-   The application automatically loads scenarios from the definitions directory. Restart the app if necessary.
+   The application loads scenarios from the definitions directory at startup or when you click on the button in the scenario web page.
 
 4. **Test Your Scenario**
 
    - Visit `/scenarios` in the web UI to see your new scenario.
-   - Test with different payloads.
+   - Test with different payloads, using the 'payload=' url parameter
 
 ---
 
@@ -102,7 +108,7 @@ app/
   controllers/
   models/
   scenarios/
-    definitions/
+    definitions/ // scenario defintions are there
     TBD/
   templates/
   static/
