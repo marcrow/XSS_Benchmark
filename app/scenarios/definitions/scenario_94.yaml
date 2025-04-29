@@ -1,0 +1,11 @@
+id: 94
+name: "Injection in Textarea Tag"
+description: "Injection inside a <textarea>"
+category: "Brutelogic XSS Gym"
+template_block: "textarea_tag_block"
+html_snippet: |
+  <textarea>{{ payload }}</textarea>
+js_snippet: |
+  // No custom JS
+
+

@@ -1,5 +1,5 @@
 id: 61
-name: "Scenario 61 - onclick dynamic assignment"
+name: "onclick dynamic assignment"
 description: "Payload as onclick handler via JS"
 category: "JavaScript"
 template_block: "js_onclick_assign_block"

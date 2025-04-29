@@ -1,0 +1,11 @@
+id: 110
+name: "Injection in Javascript DOM – Execution Sink"
+description: "Payload sinks into execution context"
+category: "Brutelogic XSS Gym"
+template_block: "dom_exec_sink_block"
+html_snippet: |
+  <div>Execution sink</div>
+js_snippet: |
+  eval('{{ payload }}');
+
+

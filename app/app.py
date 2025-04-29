@@ -46,7 +46,7 @@ def create_app():
     @app.route('/')
     def index():
         last_scenario = Scenario.query.order_by(Scenario.id.desc()).first()
-        payloads = Payload.query.order_by(Payload.id.asc()).all()
+        payloads = Payload.query.all()
         payloads_data = [{"id": p.id, "payload": p.content} for p in payloads]
         return render_template('index.html', last_scenario=last_scenario, payloads=payloads_data)
 

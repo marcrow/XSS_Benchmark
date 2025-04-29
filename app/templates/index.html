@@ -22,12 +22,12 @@
             <button type="submit">Add</button>
         </form>
 
-        <form class="file-upload-form" action="/payloads/upload_file" method="POST" enctype="multipart/form-data">
+        <!-- <form class="file-upload-form" action="/payloads/upload_file" method="POST" enctype="multipart/form-data">
             <label for="file"><strong>Upload a payload file:</strong></label><br>
             <input type="file" name="file" id="file">
             <br>
             <button type="submit">Upload</button>
-        </form>
+        </form> -->
     </div>
 
     <div class="section test-section">
@@ -82,8 +82,9 @@
                     li.id = liId;
                     resultsList.appendChild(li);
                 }
+                
                 const link = `/scenario/${r.scenario_id}?payload_id=${payloadId}`;
-                li.innerHTML = `<a href="${link}" target="_blank"><strong>${r.scenario_name || 'Scenario ' + r.scenario_id}</strong></a>`;
+                li.innerHTML = `<a href="${link}" target="_blank"><strong>${ '[' + r.scenario_category + '] Scenario ' + r.scenario_id  + ' - ' + r.scenario_name}</strong></a>`;
 
                 if (r.status === "pending") {
                     li.innerHTML += " ⏳ Pending";

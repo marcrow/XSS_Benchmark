@@ -7,6 +7,9 @@ class Scenario(db.Model):
     name = db.Column(db.String(100), unique=True)
     description = db.Column(db.Text)
     status = db.Column(db.String(32), default="pending")  # Added for progress tracking
+    category = db.Column(db.Text)
+    position = db.Column(db.Text, default="body")
+    template_block = db.Column(db.Text)
     html_snippet = db.Column(db.Text)  # Added for scenario rendering
     js_snippet = db.Column(db.Text)    # Added for scenario rendering
     # On peut ajouter d'autres champs (type, etc.)

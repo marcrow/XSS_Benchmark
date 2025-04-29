@@ -1,5 +1,5 @@
 id: 85
-name: "Scenario 85 - payload in postMessage"
+name: "payload in postMessage"
 description: "Payload posted via postMessage"
 category: "JavaScript"
 template_block: "js_postmessage_block"

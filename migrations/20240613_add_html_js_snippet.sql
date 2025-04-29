@@ -1,2 +1,2 @@
-ALTER TABLE scenarios ADD COLUMN html_snippet TEXT;
-ALTER TABLE scenarios ADD COLUMN js_snippet TEXT;
+-- ALTER TABLE scenarios DROP COLUMN categorie;
+ALTER TABLE scenarios ADD COLUMN position TEXT;

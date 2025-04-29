@@ -1,7 +1,7 @@
 id: 24
-name: "Scenario 24 - lang attribute"
+name: "lang attribute"
 description: "Injection inside the HTML lang attribute"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "html_lang_block"
 html_snippet: |
   <html lang="{{ payload }}">

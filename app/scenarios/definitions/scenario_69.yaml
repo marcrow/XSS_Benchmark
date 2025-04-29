@@ -1,5 +1,5 @@
 id: 69
-name: "Scenario 69 - template innerHTML injection"
+name: "template innerHTML injection"
 description: "Payload in a <template> innerHTML"
 category: "JavaScript"
 template_block: "js_template_inner_block"

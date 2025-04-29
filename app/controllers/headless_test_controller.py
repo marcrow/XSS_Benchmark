@@ -23,7 +23,7 @@ def run_headless_tests(payload_id, session_id, app):
     """
     with app.app_context():
         with test_semaphore:
-            scenarios = Scenario.query.all()
+            scenarios = Scenario.query.order_by(Scenario.category.asc(), Scenario.id.asc()).all()
             visited = []
             
             # Initialize progress
@@ -76,6 +76,8 @@ def run_headless_tests(payload_id, session_id, app):
                     visited.append({
                         "scenario_id": s.id,
                         "scenario_name": s.name,
+                        "scenario_description": s.description,
+                        "scenario_category": s.category,
                         "url": url
                     })
                     

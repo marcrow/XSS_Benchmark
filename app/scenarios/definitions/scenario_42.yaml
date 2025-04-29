@@ -1,7 +1,7 @@
 id: 42
-name: "Scenario 42 - inside template tag"
+name: "inside template tag"
 description: "Payload rendered in <template>"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "template_block"
 html_snippet: |
   <template>{{ payload }}</template>

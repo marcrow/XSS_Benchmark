@@ -1,7 +1,7 @@
 id: 44
-name: "Scenario 44 - injected inside span content"
+name: "injected inside span content"
 description: "Injection inside inline <span>"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "span_block"
 html_snippet: |
   <span>{{ payload }}</span>

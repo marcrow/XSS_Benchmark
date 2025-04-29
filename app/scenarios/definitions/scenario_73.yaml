@@ -1,5 +1,5 @@
 id: 73
-name: "Scenario 73 - dynamic link via createElement"
+name: "dynamic link via createElement"
 description: "Anchor created and href set via payload"
 category: "JavaScript"
 template_block: "js_create_anchor_block"

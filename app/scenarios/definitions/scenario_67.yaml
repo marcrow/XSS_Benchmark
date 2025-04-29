@@ -1,5 +1,5 @@
 id: 67
-name: "Scenario 67 - location.href assignment"
+name: "location.href assignment"
 description: "Payload redirected via JS"
 category: "JavaScript"
 template_block: "js_location_href_block"

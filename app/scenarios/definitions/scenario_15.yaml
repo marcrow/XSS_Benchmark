@@ -1,8 +1,9 @@
 id: 15
-name: "Scenario 15 - title"
+name: "title"
 description: "Injection into a page title"
-category: "Basic HTML"
+category: "Brutelogic XSS Gym"
 template_block: "title_block"
+position: head
 html_snippet: |
   <title>{{ payload }}</title>
 js_snippet: |

@@ -1,5 +1,5 @@
 id: 81
-name: "Scenario 81 - WebSocket URL from payload"
+name: "WebSocket URL from payload"
 description: "Payload used to construct a WebSocket URL"
 category: "JavaScript"
 template_block: "js_websocket_block"

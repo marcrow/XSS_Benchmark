@@ -1,7 +1,7 @@
 id: 5
 name: "Scenario 5 - img src"
 description: "Injection into an image src attribute"
-category: "Basic HTML"
+category: "Brutelogic XSS Gym"
 template_block: "img_src_block"
 html_snippet: |
   <img src="{{ payload }}">

@@ -1,5 +1,5 @@
 id: 74
-name: "Scenario 74 - payload as CSS in style.innerHTML"
+name: "payload as CSS in style.innerHTML"
 description: "Payload injected into <style> inner content"
 category: "JavaScript"
 template_block: "js_style_innerhtml_block"

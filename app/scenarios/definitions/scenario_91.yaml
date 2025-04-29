@@ -1,0 +1,11 @@
+id: 91
+name: "Injection in Attribute Value – Single Quote Delimiter"
+description: "Injection into an attribute delimited by single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "attr_single_quote_block"
+html_snippet: |
+  <img src='{{ payload }}'>
+js_snippet: |
+  // No custom JS
+
+

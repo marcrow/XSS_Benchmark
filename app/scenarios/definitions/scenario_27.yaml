@@ -1,7 +1,7 @@
 id: 27
-name: "Scenario 27 - input value"
+name: "input value"
 description: "Payload inserted into an input field value"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "input_value_block"
 html_snippet: |
   <input type="text" value="{{ payload }}">

@@ -1,0 +1,17 @@
+id: 99
+name: "Filtered Injection in Javascript Variable – Single Quote Delimiter"
+description: "Filtered payload in JS var single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_single_filtered_block"
+html_snippet: |
+  <div>Filtered single quote var</div>
+js_snippet: |
+  function sanitize(input) {
+    return input
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+  let sanitized = sanitize('{{ payload }}');
+
+

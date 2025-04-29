@@ -1,7 +1,7 @@
 id: 18
-name: "Scenario 18 - table cell"
+name: "table cell"
 description: "Injection into a table cell"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "table_block"
 html_snippet: |
   <table><tr><td>{{ payload }}</td></tr></table>

@@ -1,7 +1,7 @@
 id: 21
-name: "Scenario 21 - nested div span injection"
+name: "nested div span injection"
 description: "Injection inside a nested <div><span> context"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "nested_div_span_block"
 html_snippet: |
   <div><span>{{ payload }}</span></div>

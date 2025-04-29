@@ -1,7 +1,7 @@
 id: 33
-name: "Scenario 33 - inside <code> block"
+name: "inside <code> block"
 description: "Payload shown in a code element"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "code_block"
 html_snippet: |
   <code>{{ payload }}</code>

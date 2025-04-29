@@ -1,0 +1,11 @@
+id: 92
+name: "Filtered Injection in Attribute Value – Double Quote Delimiter"
+description: "Filtered injection into an attribute with double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "attr_double_quote_filtered_block"
+html_snippet: |
+  <input value="{{ payload }}">
+js_snippet: |
+  // No custom JS
+
+

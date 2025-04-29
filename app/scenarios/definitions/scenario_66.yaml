@@ -1,5 +1,5 @@
 id: 66
-name: "Scenario 66 - Function body with payload param"
+name: "Function body with payload param"
 description: "Payload passed as param to dynamic function"
 category: "JavaScript"
 template_block: "js_funcparam_block"

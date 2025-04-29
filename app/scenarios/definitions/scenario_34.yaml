@@ -1,7 +1,7 @@
 id: 34
-name: "Scenario 34 - style tag content"
+name: "style tag content"
 description: "Payload inside <style> element"
-category: "Basic HTML"
+category: "Brutelogic XSS Gym"
 template_block: "style_block"
 html_snippet: |
   <style>{{ payload }}</style>

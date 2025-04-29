@@ -1,0 +1,11 @@
+id: 111
+name: "To modify - Filtered Injection in HTML Comments"
+description: "Filtered payload inside HTML comment"
+category: "Brutelogic XSS Gym"
+template_block: "html_comment_filtered_block"
+html_snippet: |
+  <!-- {{ payload }} -->
+js_snippet: |
+  // No custom JS
+
+

@@ -1,0 +1,11 @@
+id: 112
+name: "To modify Filtered Injection in Javascript DOM – Document Sink"
+description: "Filtered payload in document.write"
+category: "Brutelogic XSS Gym"
+template_block: "dom_document_filtered_block"
+html_snippet: |
+  <div>Filtered document sink</div>
+js_snippet: |
+  document.write('{{ payload }}');
+
+

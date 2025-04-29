@@ -1,5 +1,5 @@
 id: 68
-name: "Scenario 68 - srcdoc iframe injection"
+name: "srcdoc iframe injection"
 description: "Payload inserted in iframe srcdoc"
 category: "JavaScript"
 template_block: "js_iframe_srcdoc_block"

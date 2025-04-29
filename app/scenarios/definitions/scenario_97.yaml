@@ -1,0 +1,11 @@
+id: 97
+name: "Injection in Javascript Variable – Single Quote Delimiter"
+description: "Payload inserted in JS variable with single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_single_quote_block"
+html_snippet: |
+  <div>Single quote JS var</div>
+js_snippet: |
+  let user = '{{ payload }}';
+
+

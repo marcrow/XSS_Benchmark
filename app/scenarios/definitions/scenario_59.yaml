@@ -1,5 +1,5 @@
 id: 59
-name: "Scenario 59 - payload as script.src"
+name: "payload as script.src"
 description: "Payload used as script src"
 category: "JavaScript"
 template_block: "js_script_src_block"

@@ -1,0 +1,11 @@
+id: 107
+name: "Filtered Double Injection in Javascript Variable"
+description: "Filtered double injection in JS var"
+category: "Brutelogic XSS Gym"
+template_block: "js_double_injection_block"
+html_snippet: |
+  <div>Double injection test</div>
+js_snippet: |
+  let part1 = '{{ payload }}', part2 = '{{ payload }}';
+
+

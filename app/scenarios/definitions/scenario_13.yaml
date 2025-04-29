@@ -1,7 +1,7 @@
 id: 13
-name: "Scenario 13 - div style"
+name: "div style"
 description: "Injection into a div style attribute"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "div_style_block"
 html_snippet: |
   <div style="{{ payload }}">Styled</div>

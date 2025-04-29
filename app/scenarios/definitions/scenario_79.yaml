@@ -1,5 +1,5 @@
 id: 79
-name: "Scenario 79 - payload in window.name"
+name: "payload in window.name"
 description: "Payload assigned to window.name"
 category: "JavaScript"
 template_block: "js_window_name_block"

@@ -1,5 +1,5 @@
 id: 89
-name: "Scenario 89 - CSS selector via payload"
+name: "CSS selector via payload"
 description: "Payload used as a CSS selector string"
 category: "JavaScript"
 template_block: "js_queryselector_block"

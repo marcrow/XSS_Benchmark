@@ -1,7 +1,7 @@
 id: 43
-name: "Scenario 43 - details summary tag"
+name: "details summary tag"
 description: "Payload inside summary of a <details>"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "details_summary_block"
 html_snippet: |
   <details><summary>{{ payload }}</summary></details>

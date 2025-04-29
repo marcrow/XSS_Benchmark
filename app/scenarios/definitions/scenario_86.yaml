@@ -1,5 +1,5 @@
 id: 86
-name: "Scenario 86 - fetch URL from payload"
+name: "fetch URL from payload"
 description: "Payload as URL in fetch call"
 category: "JavaScript"
 template_block: "js_fetch_block"

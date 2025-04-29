@@ -1,5 +1,5 @@
 id: 55
-name: "Scenario 55 - innerHTML assignment"
+name: "innerHTML assignment"
 description: "Payload inserted into innerHTML of div"
 category: "JavaScript"
 template_block: "js_innerhtml_block"

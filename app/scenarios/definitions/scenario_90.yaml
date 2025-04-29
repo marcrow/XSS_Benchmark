@@ -1,0 +1,11 @@
+id: 90
+name: "Filtered Injection Inside Event Handler"
+description: "Filtered injection inside an onload event handler"
+category: "Brutelogic XSS Gym"
+template_block: "event_handler_block"
+html_snippet: |
+  <div onload="{{ payload }}">Hello</div>
+js_snippet: |
+  // No custom JS
+
+

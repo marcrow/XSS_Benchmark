@@ -1,7 +1,7 @@
 id: 4
 name: "Scenario 4 - input hidden"
 description: "Injection into a hidden input value"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "input_hidden_block"
 html_snippet: |
   <input type="hidden" name="data" value="{{ payload }}">

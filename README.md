@@ -131,5 +131,6 @@ For questions or support, please open an issue or contact the maintainer.
 
 
 ## TBD
-Add more scenario
-
+For js_snippet insert the payload in a custom js file. Because for brutelogic xss gym, there is redundancy
+Brutelogic filtered is probably when quote are backslashed
+add scenario : script src in head section 

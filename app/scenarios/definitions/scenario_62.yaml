@@ -1,5 +1,5 @@
 id: 62
-name: "Scenario 62 - href JS assignment"
+name: "href JS assignment"
 description: "Payload assigned to href attribute"
 category: "JavaScript"
 template_block: "js_href_assign_block"

@@ -1,0 +1,17 @@
+id: 100
+name: "Filtered Injection in Javascript Variable – Double Quote Delimiter"
+description: "Filtered payload in JS var double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_double_filtered_block"
+html_snippet: |
+  <div>Filtered double quote var</div>
+js_snippet: |
+  function sanitize(input) {
+    return input
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+  let sanitized = sanitize("{{ payload }}");
+
+

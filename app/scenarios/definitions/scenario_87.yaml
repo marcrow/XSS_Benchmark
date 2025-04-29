@@ -1,5 +1,5 @@
 id: 87
-name: "Scenario 87 - DOMParser HTML injection"
+name: "DOMParser HTML injection"
 description: "Payload parsed as HTML via DOMParser"
 category: "JavaScript"
 template_block: "js_domparser_block"

@@ -1,0 +1,11 @@
+id: 96
+name: "Injection in Script Tag – Double Quote Delimiter"
+description: "Injection inside a script using double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "script_double_quote_block"
+html_snippet: |
+  //no html
+js_snippet: |
+  let data = "{{ payload }}";
+
+

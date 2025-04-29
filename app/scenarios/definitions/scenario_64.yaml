@@ -1,5 +1,5 @@
 id: 64
-name: "Scenario 64 - createTextNode with payload"
+name: "createTextNode with payload"
 description: "Payload used in DOM text node"
 category: "JavaScript"
 template_block: "js_createtext_block"

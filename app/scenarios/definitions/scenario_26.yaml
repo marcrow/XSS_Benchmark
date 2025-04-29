@@ -1,7 +1,7 @@
 id: 26
-name: "Scenario 26 - profile bio div"
+name: "profile bio div"
 description: "Injection in user profile bio rendered in a div"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "profile_bio_div_block"
 html_snippet: |
   <div class="user-bio">{{ payload }}</div>

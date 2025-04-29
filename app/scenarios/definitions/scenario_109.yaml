@@ -1,0 +1,11 @@
+id: 109
+name: "Injection in Javascript DOM – Location Sink"
+description: "Payload sinks into location.href"
+category: "Brutelogic XSS Gym"
+template_block: "dom_location_sink_block"
+html_snippet: |
+  <div>Location sink</div>
+js_snippet: |
+  location.href = '{{ payload }}';
+
+

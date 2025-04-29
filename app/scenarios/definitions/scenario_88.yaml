@@ -1,5 +1,5 @@
 id: 88
-name: "Scenario 88 - CustomEvent with payload as detail"
+name: "CustomEvent with payload as detail"
 description: "Payload embedded in custom event data"
 category: "JavaScript"
 template_block: "js_customevent_block"

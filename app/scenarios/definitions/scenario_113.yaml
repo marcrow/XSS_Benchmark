@@ -1,0 +1,13 @@
+id: 113
+name: "Injection in Script Tag With Header"
+description: "Injection in script tag with special header"
+category: "Brutelogic XSS Gym"
+template_block: "script_header_block"
+html_snippet: |
+  <script type="application/javascript">
+    {{ payload }}
+  </script>
+js_snippet: |
+  // No custom JS
+
+

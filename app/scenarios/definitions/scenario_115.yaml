@@ -1,0 +1,13 @@
+id: 115
+name: "Injection Bypassing CSP"
+description: "Injection designed to bypass CSP"
+category: "Brutelogic XSS Gym"
+template_block: "csp_bypass_block"
+html_snippet: |
+  <div>CSP Bypass attempt</div>
+js_snippet: |
+  let src = '{{ payload }}';
+  let el = document.createElement("script");
+  el.src = src;
+  document.body.appendChild(el);
+

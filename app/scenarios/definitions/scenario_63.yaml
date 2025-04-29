@@ -1,5 +1,5 @@
 id: 63
-name: "Scenario 63 - innerText assignment"
+name: "innerText assignment"
 description: "Payload assigned to innerText"
 category: "JavaScript"
 template_block: "js_innertext_block"

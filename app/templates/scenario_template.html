@@ -2,8 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ scenario.name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    {# Inject html_snippet in head if scenario.position == 'head' #}
+    {% if scenario.position == 'head' %}
+        {% set snippet = scenario.html_snippet.replace("{{ payload }}", payload.content if payload else "") %}
+        {{ snippet | safe }}
+    {% endif %}
+
+    <title>{{ scenario.name }}</title>
+    
 </head>
 <body>
         <!-- Script to report XSS execution or non-execution -->
@@ -72,8 +80,10 @@
     <p><strong>Description:</strong> {{ scenario.description }}</p>
 
     {# Render the scenario's HTML snippet, injecting the payload #}
-    {% set snippet = scenario.html_snippet.replace("{{ payload }}", payload.content if payload else "") %}
-    {{ snippet | safe }}
+    {% if scenario.position != 'head' %}
+        {% set snippet = scenario.html_snippet.replace("{{ payload }}", payload.content if payload else "") %}
+        {{ snippet | safe }}
+    {% endif %}
 
     {# Render the scenario's JS snippet, if any #}
     {% if scenario.js_snippet and scenario.js_snippet.strip() %}

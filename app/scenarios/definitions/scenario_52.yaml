@@ -1,5 +1,5 @@
 id: 52
-name: "Scenario 52 - setTimeout string execution"
+name: "setTimeout string execution"
 description: "Payload passed as code string to setTimeout"
 category: "JavaScript"
 template_block: "js_settimeout_block"

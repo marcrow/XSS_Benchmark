@@ -1,7 +1,7 @@
 id: 16
-name: "Scenario 16 - script var"
+name: "script var"
 description: "Injection into a JS variable in a script"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "script_var_block"
 html_snippet: |
   <script>

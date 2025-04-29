@@ -1,7 +1,7 @@
 id: 10
-name: "Scenario 10 - comment"
+name: "comment"
 description: "Injection into an HTML comment"
-category: "Basic HTML"
+category: "Brutelogic XSS Gym"
 template_block: "comment_block"
 html_snippet: |
   <!-- {{ payload }} -->

@@ -1,7 +1,7 @@
 id: 32
-name: "Scenario 32 - inside noscript tag"
+name: "inside noscript tag"
 description: "Payload inside <noscript>"
-category: "Basic HTML"
+category: "Brutelogic XSS Gym"
 template_block: "noscript_block"
 html_snippet: |
   <noscript>{{ payload }}</noscript>

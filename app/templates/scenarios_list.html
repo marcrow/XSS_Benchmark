@@ -20,8 +20,8 @@
 <ul>
 {% for scenario in scenarios %}
     <li>
-        <strong>ID : {{ scenario.id }}</strong> -
-        {{ scenario.name }}
+        <strong>Scenario {{ scenario.id }} - [ Category : {{scenario.category}} ]</strong> -
+        {{ scenario.description }}
         <!-- Lien vers la page /scenario/<id> -->
         <a href="/scenario/{{ scenario.id }}">Accéder à ce scénario</a>
     </li>

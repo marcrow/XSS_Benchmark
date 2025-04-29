@@ -1,7 +1,7 @@
 id: 41
-name: "Scenario 41 - title attribute"
+name: "title attribute"
 description: "Payload in title tooltip"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "div_title_attribute_block"
 html_snippet: |
   <div title="{{ payload }}">Hover me</div>

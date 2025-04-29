@@ -1,0 +1,13 @@
+id: 106
+name: "To modify - Injection in HTTP Header"
+description: "Payload injected into custom HTTP header"
+category: "Brutelogic XSS Gym"
+template_block: "http_header_block"
+html_snippet: |
+  <div>Custom HTTP header</div>
+js_snippet: |
+  fetch("/api", {
+    headers: { "X-Injected": "{{ payload }}" }
+  });
+
+

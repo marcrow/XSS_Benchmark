@@ -1,0 +1,11 @@
+id: 108
+name: "Injection in Javascript DOM – Document Sink"
+description: "Payload sinks into document.write"
+category: "Brutelogic XSS Gym"
+template_block: "dom_document_sink_block"
+html_snippet: |
+  <div>DOM document sink</div>
+js_snippet: |
+  document.write('{{ payload }}');
+
+

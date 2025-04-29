@@ -1,5 +1,5 @@
 id: 71
-name: "Scenario 71 - onerror image injection"
+name: "onerror image injection"
 description: "Payload executed in dynamically created img"
 category: "JavaScript"
 template_block: "js_img_onerror_block"

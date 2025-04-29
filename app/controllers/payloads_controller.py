@@ -23,7 +23,7 @@ def upload_payload():
     db.session.commit()
 
     # Redirection vers la page qui liste les payloads
-    return redirect(url_for('payloads_bp.list_payloads'))
+    return redirect("/")
 
 @payloads_bp.route('/upload_file', methods=['POST'])
 def upload_file():
@@ -45,7 +45,7 @@ def upload_file():
 
 @payloads_bp.route('/payloads', methods=['GET'])
 def list_payloads():
-    payloads = Payload.query.order_by(Payload.id.asc()).all()
+    payloads = Payload.query.all()
     nb_scenarios = Scenario.query.count()
     payloads_data = []
     for p in payloads:

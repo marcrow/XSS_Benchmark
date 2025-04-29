@@ -1,7 +1,7 @@
 id: 38
-name: "Scenario 38 - aria-label"
+name: "aria-label"
 description: "Payload in aria-label attribute"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "aria_label_block"
 html_snippet: |
   <button aria-label="{{ payload }}">Click</button>

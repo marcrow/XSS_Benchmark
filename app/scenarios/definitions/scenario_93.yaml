@@ -1,0 +1,11 @@
+id: 93
+name: "Filtered Injection in Attribute Value – Single Quote Delimiter"
+description: "Filtered injection into an attribute with single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "attr_single_quote_filtered_block"
+html_snippet: |
+  <input value='{{ payload }}'>
+js_snippet: |
+  // No custom JS
+
+

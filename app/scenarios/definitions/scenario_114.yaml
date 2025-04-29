@@ -1,0 +1,11 @@
+id: 114
+name: "Injection in URL"
+description: "Payload injected into URL parameter"
+category: "Brutelogic XSS Gym"
+template_block: "url_injection_block"
+html_snippet: |
+  <a href="/profile?name={{ payload }}">Profile</a>
+js_snippet: |
+  // No custom JS
+
+

@@ -1,5 +1,5 @@
 id: 57
-name: "Scenario 57 - JSON.parse with payload"
+name: "JSON.parse with payload"
 description: "Payload wrapped as JSON string and parsed"
 category: "JavaScript"
 template_block: "js_json_parse_block"

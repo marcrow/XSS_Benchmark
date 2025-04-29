@@ -1,5 +1,5 @@
 id: 58
-name: "Scenario 58 - dynamic attribute with setAttribute"
+name: "dynamic attribute with setAttribute"
 description: "Payload used with setAttribute"
 category: "JavaScript"
 template_block: "js_setattribute_block"

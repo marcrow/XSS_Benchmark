@@ -1,5 +1,5 @@
 id: 60
-name: "Scenario 60 - document.write with payload"
+name: "document.write with payload"
 description: "Payload used inside document.write"
 category: "JavaScript"
 template_block: "js_docwrite_block"

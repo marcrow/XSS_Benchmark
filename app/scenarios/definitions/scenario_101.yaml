@@ -1,0 +1,13 @@
+id: 101
+name: "Injection in Script Tag – Backticks Delimiter"
+description: "Payload injected inside backticks template"
+category: "Brutelogic XSS Gym"
+template_block: "script_backticks_block"
+html_snippet: |
+  <script>
+    let msg = `{{ payload }}`;
+  </script>
+js_snippet: |
+  // No custom JS
+
+

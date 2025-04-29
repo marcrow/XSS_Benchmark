@@ -1,5 +1,5 @@
 id: 72
-name: "Scenario 72 - payload in dynamic form action"
+name: "payload in dynamic form action"
 description: "Payload as form action target"
 category: "JavaScript"
 template_block: "js_form_action_block"

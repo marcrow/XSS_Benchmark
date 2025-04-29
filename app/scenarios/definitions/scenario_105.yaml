@@ -1,0 +1,14 @@
+id: 105
+name: "To modify - Validated Injection in HTTP Reference"
+description: "Payload validated and used in HTTP referrer"
+category: "Brutelogic XSS Gym"
+template_block: "http_referrer_block"
+html_snippet: |
+  <div id="log"></div>
+js_snippet: |
+  // Simulated referer injection
+  let simulatedReferrer = "{{ payload }}";
+  document.getElementById("log").innerHTML = simulatedReferrer;
+
+
+

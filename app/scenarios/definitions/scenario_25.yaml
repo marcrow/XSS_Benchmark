@@ -1,7 +1,7 @@
 id: 25
-name: "Scenario 25 - User-Agent meta tag"
+name: "User-Agent meta tag"
 description: "Injection in meta tag that reflects User-Agent"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "meta_useragent_block"
 html_snippet: |
   <meta name="user-agent" content="{{ payload }}">

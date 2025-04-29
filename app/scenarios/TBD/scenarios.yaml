@@ -1,489 +1,335 @@
 ---
-<!-- scenario_51.yaml -->
-id: 51
-name: "Scenario 51 - payload in eval()"
-description: "Payload injected directly into eval"
-category: "JavaScript"
-template_block: "js_eval_block"
+<!-- scenario_90.yaml -->
+id: 90
+name: "Filtered Injection Inside Event Handler"
+description: "Filtered injection inside an onload event handler"
+category: "Brutelogic XSS Gym"
+template_block: "event_handler_block"
 html_snippet: |
-  <div>Evaluating payload...</div>
+  <div onload="{{ payload }}">Hello</div>
 js_snippet: |
-  eval("console.log('{{ payload }}')");
+  // No custom JS
 
 ---
-<!-- scenario_52.yaml -->
-id: 52
-name: "Scenario 52 - setTimeout string execution"
-description: "Payload passed as code string to setTimeout"
-category: "JavaScript"
-template_block: "js_settimeout_block"
+<!-- scenario_91.yaml -->
+id: 91
+name: "Injection in Attribute Value – Single Quote Delimiter"
+description: "Injection into an attribute delimited by single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "attr_single_quote_block"
 html_snippet: |
-  <div>Testing setTimeout</div>
+  <img src='{{ payload }}'>
 js_snippet: |
-  setTimeout("console.log('{{ payload }}')", 10);
+  // No custom JS
 
 ---
-<!-- scenario_53.yaml -->
-id: 53
-name: "Scenario 53 - payload in new Function()"
-description: "Payload used in Function constructor"
-category: "JavaScript"
-template_block: "js_newfunction_block"
+<!-- scenario_92.yaml -->
+id: 92
+name: "Filtered Injection in Attribute Value – Double Quote Delimiter"
+description: "Filtered injection into an attribute with double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "attr_double_quote_filtered_block"
 html_snippet: |
-  <div>Running new Function...</div>
+  <input value="{{ payload }}">
 js_snippet: |
-  let f = new Function("console.log('{{ payload }}')");
-  f();
+  // No custom JS
 
 ---
-<!-- scenario_54.yaml -->
-id: 54
-name: "Scenario 54 - payload in script injection"
-description: "Script element created and payload assigned as content"
-category: "JavaScript"
-template_block: "js_create_script_block"
+<!-- scenario_93.yaml -->
+id: 93
+name: "Filtered Injection in Attribute Value – Single Quote Delimiter"
+description: "Filtered injection into an attribute with single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "attr_single_quote_filtered_block"
 html_snippet: |
-  <div>Injecting script element</div>
+  <input value='{{ payload }}'>
 js_snippet: |
-  let s = document.createElement("script");
-  s.textContent = "{{ payload }}";
-  document.body.appendChild(s);
+  // No custom JS
 
 ---
-<!-- scenario_55.yaml -->
-id: 55
-name: "Scenario 55 - innerHTML assignment"
-description: "Payload inserted into innerHTML of div"
-category: "JavaScript"
-template_block: "js_innerhtml_block"
+<!-- scenario_94.yaml -->
+id: 94
+name: "Injection in Textarea Tag"
+description: "Injection inside a <textarea>"
+category: "Brutelogic XSS Gym"
+template_block: "textarea_tag_block"
 html_snippet: |
-  <div id="xssTarget"></div>
+  <textarea>{{ payload }}</textarea>
 js_snippet: |
-  document.getElementById("xssTarget").innerHTML = "{{ payload }}";
+  // No custom JS
 
 ---
-<!-- scenario_56.yaml -->
-id: 56
-name: "Scenario 56 - iframe.src via payload"
-description: "Payload assigned to iframe.src"
-category: "JavaScript"
-template_block: "js_iframe_src_block"
+<!-- scenario_95.yaml -->
+id: 95
+name: "Injection in Script Tag – Single Quote Delimiter"
+description: "Injection inside a script using single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "script_single_quote_block"
 html_snippet: |
-  <iframe id="i1"></iframe>
+  // only js
 js_snippet: |
-  document.getElementById("i1").src = "{{ payload }}";
+  let data = '{{ payload }}';
 
 ---
-<!-- scenario_57.yaml -->
-id: 57
-name: "Scenario 57 - JSON.parse with payload"
-description: "Payload wrapped as JSON string and parsed"
-category: "JavaScript"
-template_block: "js_json_parse_block"
+<!-- scenario_96.yaml -->
+id: 96
+name: "Injection in Script Tag – Double Quote Delimiter"
+description: "Injection inside a script using double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "script_double_quote_block"
 html_snippet: |
-  <div>Parsing JSON</div>
+  //no html
 js_snippet: |
-  let obj = JSON.parse('{"key": "{{ payload }}"}');
-  console.log(obj.key);
+  let data = "{{ payload }}";
 
 ---
-<!-- scenario_58.yaml -->
-id: 58
-name: "Scenario 58 - dynamic attribute with setAttribute"
-description: "Payload used with setAttribute"
-category: "JavaScript"
-template_block: "js_setattribute_block"
+<!-- scenario_97.yaml -->
+id: 97
+name: "Injection in Javascript Variable – Single Quote Delimiter"
+description: "Payload inserted in JS variable with single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_single_quote_block"
 html_snippet: |
-  <div id="target"></div>
+  <div>Single quote JS var</div>
 js_snippet: |
-  document.getElementById("target").setAttribute("data-x", "{{ payload }}");
+  let user = '{{ payload }}';
 
 ---
-<!-- scenario_59.yaml -->
-id: 59
-name: "Scenario 59 - payload as script.src"
-description: "Payload used as script src"
-category: "JavaScript"
-template_block: "js_script_src_block"
+<!-- scenario_98.yaml -->
+id: 98
+name: "Injection in Javascript Variable – Double Quote Delimiter"
+description: "Payload inserted in JS variable with double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_double_quote_block"
 html_snippet: |
-  <div>Loading script</div>
+  <div>Double quote JS var</div>
 js_snippet: |
-  let s = document.createElement("script");
-  s.src = "{{ payload }}";
-  document.head.appendChild(s);
+  let user = "{{ payload }}";
 
 ---
-<!-- scenario_60.yaml -->
-id: 60
-name: "Scenario 60 - document.write with payload"
-description: "Payload used inside document.write"
-category: "JavaScript"
-template_block: "js_docwrite_block"
+<!-- scenario_99.yaml -->
+id: 99
+name: "Filtered Injection in Javascript Variable – Single Quote Delimiter"
+description: "Filtered payload in JS var single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_single_filtered_block"
 html_snippet: |
-  <div>Using document.write</div>
+  <div>Filtered single quote var</div>
 js_snippet: |
-  document.write("{{ payload }}");
-
----
-<!-- scenario_61.yaml -->
-id: 61
-name: "Scenario 61 - onclick dynamic assignment"
-description: "Payload as onclick handler via JS"
-category: "JavaScript"
-template_block: "js_onclick_assign_block"
-html_snippet: |
-  <button id="b1">Click</button>
-js_snippet: |
-  document.getElementById("b1").setAttribute("onclick", "{{ payload }}");
-
----
-<!-- scenario_62.yaml -->
-id: 62
-name: "Scenario 62 - href JS assignment"
-description: "Payload assigned to href attribute"
-category: "JavaScript"
-template_block: "js_href_assign_block"
-html_snippet: |
-  <a id="link">Link</a>
-js_snippet: |
-  document.getElementById("link").href = "{{ payload }}";
-
----
-<!-- scenario_63.yaml -->
-id: 63
-name: "Scenario 63 - innerText assignment"
-description: "Payload assigned to innerText"
-category: "JavaScript"
-template_block: "js_innertext_block"
-html_snippet: |
-  <div id="info"></div>
-js_snippet: |
-  document.getElementById("info").innerText = "{{ payload }}";
-
----
-<!-- scenario_64.yaml -->
-id: 64
-name: "Scenario 64 - createTextNode with payload"
-description: "Payload used in DOM text node"
-category: "JavaScript"
-template_block: "js_createtext_block"
-html_snippet: |
-  <div id="txt"></div>
-js_snippet: |
-  let node = document.createTextNode("{{ payload }}");
-  document.getElementById("txt").appendChild(node);
-
----
-<!-- scenario_65.yaml -->
-id: 65
-name: "Scenario 65 - array index with payload"
-description: "Payload used as array index"
-category: "JavaScript"
-template_block: "js_array_index_block"
-html_snippet: |
-  <div>Array lookup</div>
-js_snippet: |
-  let arr = []; arr["{{ payload }}"] = "x"; console.log(arr["{{ payload }}"]);
-
----
-<!-- scenario_66.yaml -->
-id: 66
-name: "Scenario 66 - Function body with payload param"
-description: "Payload passed as param to dynamic function"
-category: "JavaScript"
-template_block: "js_funcparam_block"
-html_snippet: |
-  <div>Running dynamic function</div>
-js_snippet: |
-  new Function("x", "{{ payload }}")("value");
-
----
-<!-- scenario_67.yaml -->
-id: 67
-name: "Scenario 67 - location.href assignment"
-description: "Payload redirected via JS"
-category: "JavaScript"
-template_block: "js_location_href_block"
-html_snippet: |
-  <div>Redirect test</div>
-js_snippet: |
-  location.href = "{{ payload }}";
-
----
-<!-- scenario_68.yaml -->
-id: 68
-name: "Scenario 68 - srcdoc iframe injection"
-description: "Payload inserted in iframe srcdoc"
-category: "JavaScript"
-template_block: "js_iframe_srcdoc_block"
-html_snippet: |
-  <iframe id="xssFrame"></iframe>
-js_snippet: |
-  document.getElementById("xssFrame").srcdoc = "{{ payload }}";
-
----
-<!-- scenario_69.yaml -->
-id: 69
-name: "Scenario 69 - template innerHTML injection"
-description: "Payload in a <template> innerHTML"
-category: "JavaScript"
-template_block: "js_template_inner_block"
-html_snippet: |
-  <template id="tpl"></template>
-js_snippet: |
-  document.getElementById("tpl").innerHTML = "{{ payload }}";
-
----
-<!-- scenario_70.yaml -->
-id: 70
-name: "Scenario 70 - payload inside setInterval"
-description: "Payload evaluated via setInterval"
-category: "JavaScript"
-template_block: "js_setinterval_block"
-html_snippet: |
-  <div>Testing setInterval</div>
-js_snippet: |
-  setInterval("console.log('{{ payload }}')", 1000);
-
----
-<!-- scenario_71.yaml -->
-id: 71
-name: "Scenario 71 - onerror image injection"
-description: "Payload executed in dynamically created img"
-category: "JavaScript"
-template_block: "js_img_onerror_block"
-html_snippet: |
-  <div>Testing dynamic image</div>
-js_snippet: |
-  let i = document.createElement("img");
-  i.setAttribute("onerror", "{{ payload }}");
-  i.src = "invalid.jpg";
-  document.body.appendChild(i);
-
----
-<!-- scenario_72.yaml -->
-id: 72
-name: "Scenario 72 - payload in dynamic form action"
-description: "Payload as form action target"
-category: "JavaScript"
-template_block: "js_form_action_block"
-html_snippet: |
-  <form id="f1" method="get"></form>
-js_snippet: |
-  document.getElementById("f1").action = "{{ payload }}";
-
----
-<!-- scenario_73.yaml -->
-id: 73
-name: "Scenario 73 - dynamic link via createElement"
-description: "Anchor created and href set via payload"
-category: "JavaScript"
-template_block: "js_create_anchor_block"
-html_snippet: |
-  <div>Dynamic anchor</div>
-js_snippet: |
-  let a = document.createElement("a");
-  a.href = "{{ payload }}";
-  a.innerText = "Go";
-  document.body.appendChild(a);
-
----
-<!-- scenario_74.yaml -->
-id: 74
-name: "Scenario 74 - payload as CSS in style.innerHTML"
-description: "Payload injected into <style> inner content"
-category: "JavaScript"
-template_block: "js_style_innerhtml_block"
-html_snippet: |
-  <style id="s1"></style>
-js_snippet: |
-  document.getElementById("s1").innerHTML = "{{ payload }}";
-
----
-<!-- scenario_75.yaml -->
-id: 75
-name: "Scenario 75 - className assignment"
-description: "Payload assigned to DOM className"
-category: "JavaScript"
-template_block: "js_classname_block"
-html_snippet: |
-  <div id="user"></div>
-js_snippet: |
-  document.getElementById("user").className = "{{ payload }}";
-
----
-<!-- scenario_76.yaml -->
-id: 76
-name: "Scenario 76 - data-* attribute via dataset"
-description: "Payload used in dataset property"
-category: "JavaScript"
-template_block: "js_dataset_block"
-html_snippet: |
-  <div id="target"></div>
-js_snippet: |
-  document.getElementById("target").dataset.info = "{{ payload }}";
-
----
-<!-- scenario_77.yaml -->
-id: 77
-name: "Scenario 77 - payload via history.pushState"
-description: "Payload used in pushState URL"
-category: "JavaScript"
-template_block: "js_pushstate_block"
-html_snippet: |
-  <div>History manipulation</div>
-js_snippet: |
-  history.pushState({}, "", "{{ payload }}");
-
----
-<!-- scenario_78.yaml -->
-id: 78
-name: "Scenario 78 - img.src with payload"
-description: "Payload injected via image.src"
-category: "JavaScript"
-template_block: "js_img_src_block"
-html_snippet: |
-  <img id="image">
-js_snippet: |
-  document.getElementById("image").src = "{{ payload }}";
-
----
-<!-- scenario_79.yaml -->
-id: 79
-name: "Scenario 79 - payload in window.name"
-description: "Payload assigned to window.name"
-category: "JavaScript"
-template_block: "js_window_name_block"
-html_snippet: |
-  <div>Assigning to window.name</div>
-js_snippet: |
-  window.name = "{{ payload }}";
-
----
-<!-- scenario_80.yaml -->
-id: 80
-name: "Scenario 80 - URLSearchParams with payload"
-description: "Payload used in URLSearchParams"
-category: "JavaScript"
-template_block: "js_urlparams_block"
-html_snippet: |
-  <div>URLSearchParams test</div>
-js_snippet: |
-  let url = new URL("https://example.com");
-  url.searchParams.set("x", "{{ payload }}");
-  console.log(url.toString());
-
----
-<!-- scenario_81.yaml -->
-id: 81
-name: "Scenario 81 - WebSocket URL from payload"
-description: "Payload used to construct a WebSocket URL"
-category: "JavaScript"
-template_block: "js_websocket_block"
-html_snippet: |
-  <div>WebSocket test</div>
-js_snippet: |
-  let socket = new WebSocket("wss://" + "{{ payload }}");
-
----
-<!-- scenario_82.yaml -->
-id: 82
-name: "Scenario 82 - dynamic import() using payload"
-description: "Payload used as module path in dynamic import"
-category: "JavaScript"
-template_block: "js_dynamic_import_block"
-html_snippet: |
-  <div>Importing module</div>
-js_snippet: |
-  import("{{ payload }}").catch(e => console.error("import failed"));
-
----
-<!-- scenario_83.yaml -->
-id: 83
-name: "Scenario 83 - payload in localStorage key"
-description: "Payload used as key in localStorage"
-category: "JavaScript"
-template_block: "js_localstorage_key_block"
-html_snippet: |
-  <div>localStorage test</div>
-js_snippet: |
-  localStorage.setItem("{{ payload }}", "x");
-
----
-<!-- scenario_84.yaml -->
-id: 84
-name: "Scenario 84 - payload in localStorage value"
-description: "Payload used as value in localStorage"
-category: "JavaScript"
-template_block: "js_localstorage_value_block"
-html_snippet: |
-  <div>localStorage value test</div>
-js_snippet: |
-  localStorage.setItem("key", "{{ payload }}");
-
----
-<!-- scenario_85.yaml -->
-id: 85
-name: "Scenario 85 - payload in postMessage"
-description: "Payload posted via postMessage"
-category: "JavaScript"
-template_block: "js_postmessage_block"
-html_snippet: |
-  <iframe id="targetFrame"></iframe>
-js_snippet: |
-  let frame = document.getElementById("targetFrame").contentWindow;
-  frame.postMessage("{{ payload }}", "*");
-
----
-<!-- scenario_86.yaml -->
-id: 86
-name: "Scenario 86 - fetch URL from payload"
-description: "Payload as URL in fetch call"
-category: "JavaScript"
-template_block: "js_fetch_block"
-html_snippet: |
-  <div>fetch() call test</div>
-js_snippet: |
-  fetch("{{ payload }}").then(r => r.text()).then(console.log);
-
----
-<!-- scenario_87.yaml -->
-id: 87
-name: "Scenario 87 - DOMParser HTML injection"
-description: "Payload parsed as HTML via DOMParser"
-category: "JavaScript"
-template_block: "js_domparser_block"
-html_snippet: |
-  <div>Parsing HTML string</div>
-js_snippet: |
-  let doc = new DOMParser().parseFromString("{{ payload }}", "text/html");
-  console.log(doc.body.innerHTML);
-
----
-<!-- scenario_88.yaml -->
-id: 88
-name: "Scenario 88 - CustomEvent with payload as detail"
-description: "Payload embedded in custom event data"
-category: "JavaScript"
-template_block: "js_customevent_block"
-html_snippet: |
-  <div>Dispatching event</div>
-js_snippet: |
-  let event = new CustomEvent("xssEvent", { detail: "{{ payload }}" });
-  document.dispatchEvent(event);
-
----
-<!-- scenario_89.yaml -->
-id: 89
-name: "Scenario 89 - CSS selector via payload"
-description: "Payload used as a CSS selector string"
-category: "JavaScript"
-template_block: "js_queryselector_block"
-html_snippet: |
-  <div>CSS selector test</div>
-js_snippet: |
-  try {
-    document.querySelector("{{ payload }}");
-  } catch(e) {
-    console.log("Invalid selector");
+  function sanitize(input) {
+    return input
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
   }
+  let sanitized = sanitize('{{ payload }}');
+
+---
+<!-- scenario_100.yaml -->
+id: 100
+name: "Filtered Injection in Javascript Variable – Double Quote Delimiter"
+description: "Filtered payload in JS var double quotes"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_double_filtered_block"
+html_snippet: |
+  <div>Filtered double quote var</div>
+js_snippet: |
+  function sanitize(input) {
+    return input
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+  let sanitized = sanitize("{{ payload }}");
+
+---
+<!-- scenario_101.yaml -->
+id: 101
+name: "Injection in Script Tag – Backticks Delimiter"
+description: "Payload injected inside backticks template"
+category: "Brutelogic XSS Gym"
+template_block: "script_backticks_block"
+html_snippet: |
+  <script>
+    let msg = `{{ payload }}`;
+  </script>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_102.yaml -->
+id: 102
+name: "Injection in Javascript Variable – Backticks Delimiter"
+description: "Payload injected inside JS backtick variable"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_backticks_block"
+html_snippet: |
+  <div>Backtick JS var</div>
+js_snippet: |
+  let data = `{{ payload }}`;
+
+---
+<!-- scenario_103.yaml -->
+id: 103
+name: "Filtered Injection in Javascript Variable – Backticks Delimiter"
+description: "Filtered payload in backticks variable"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_backticks_filtered_block"
+html_snippet: |
+  <div>Filtered backtick var</div>
+js_snippet: |
+  let safeData = `{{ payload }}`;
+
+---
+<!-- scenario_104.yaml -->
+id: 104
+name: "To modify - Filtered Injection in Javascript Variable – Backticks Delimiter"
+description: "Another filtered payload in backticks variable"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_backticks_filtered2_block"
+html_snippet: |
+  <div>Filtered backtick var with encodeURIComponent</div>
+js_snippet: |
+  let safeData = `Encoded: ${encodeURIComponent('{{ payload }}')}`;
+
+---
+<!-- scenario_105.yaml -->
+id: 105
+name: "To modify - Validated Injection in HTTP Reference"
+description: "Payload validated and used in HTTP referrer"
+category: "Brutelogic XSS Gym"
+template_block: "http_referrer_block"
+html_snippet: |
+  <div id="log"></div>
+js_snippet: |
+  // Simulated referer injection
+  let simulatedReferrer = "{{ payload }}";
+  document.getElementById("log").innerHTML = simulatedReferrer;
+
+
+---
+<!-- scenario_106.yaml -->
+id: 106
+name: "To modify - Injection in HTTP Header"
+description: "Payload injected into custom HTTP header"
+category: "Brutelogic XSS Gym"
+template_block: "http_header_block"
+html_snippet: |
+  <div>Custom HTTP header</div>
+js_snippet: |
+  fetch("/api", {
+    headers: { "X-Injected": "{{ payload }}" }
+  });
+
+---
+<!-- scenario_107.yaml -->
+id: 107
+name: "Filtered Double Injection in Javascript Variable"
+description: "Filtered double injection in JS var"
+category: "Brutelogic XSS Gym"
+template_block: "js_double_injection_block"
+html_snippet: |
+  <div>Double injection test</div>
+js_snippet: |
+  let part1 = '{{ payload }}', part2 = '{{ payload }}';
+
+---
+<!-- scenario_108.yaml -->
+id: 108
+name: "Injection in Javascript DOM – Document Sink"
+description: "Payload sinks into document.write"
+category: "Brutelogic XSS Gym"
+template_block: "dom_document_sink_block"
+html_snippet: |
+  <div>DOM document sink</div>
+js_snippet: |
+  document.write('{{ payload }}');
+
+---
+<!-- scenario_109.yaml -->
+id: 109
+name: "Injection in Javascript DOM – Location Sink"
+description: "Payload sinks into location.href"
+category: "Brutelogic XSS Gym"
+template_block: "dom_location_sink_block"
+html_snippet: |
+  <div>Location sink</div>
+js_snippet: |
+  location.href = '{{ payload }}';
+
+---
+<!-- scenario_110.yaml -->
+id: 110
+name: "Injection in Javascript DOM – Execution Sink"
+description: "Payload sinks into execution context"
+category: "Brutelogic XSS Gym"
+template_block: "dom_exec_sink_block"
+html_snippet: |
+  <div>Execution sink</div>
+js_snippet: |
+  eval('{{ payload }}');
+
+---
+<!-- scenario_111.yaml -->
+id: 111
+name: "To modify - Filtered Injection in HTML Comments"
+description: "Filtered payload inside HTML comment"
+category: "Brutelogic XSS Gym"
+template_block: "html_comment_filtered_block"
+html_snippet: |
+  <!-- {{ payload }} -->
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_112.yaml -->
+id: 112
+name: "To modify Filtered Injection in Javascript DOM – Document Sink"
+description: "Filtered payload in document.write"
+category: "Brutelogic XSS Gym"
+template_block: "dom_document_filtered_block"
+html_snippet: |
+  <div>Filtered document sink</div>
+js_snippet: |
+  document.write('{{ payload }}');
+
+---
+<!-- scenario_113.yaml -->
+id: 113
+name: "Injection in Script Tag With Header"
+description: "Injection in script tag with special header"
+category: "Brutelogic XSS Gym"
+template_block: "script_header_block"
+html_snippet: |
+  <script type="application/javascript">
+    {{ payload }}
+  </script>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_114.yaml -->
+id: 114
+name: "Injection in URL"
+description: "Payload injected into URL parameter"
+category: "Brutelogic XSS Gym"
+template_block: "url_injection_block"
+html_snippet: |
+  <a href="/profile?name={{ payload }}">Profile</a>
+js_snippet: |
+  // No custom JS
+
+---
+<!-- scenario_115.yaml -->
+id: 115
+name: "Injection Bypassing CSP"
+description: "Injection designed to bypass CSP"
+category: "Brutelogic XSS Gym"
+template_block: "csp_bypass_block"
+html_snippet: |
+  <div>CSP Bypass attempt</div>
+js_snippet: |
+  let src = '{{ payload }}';
+  let el = document.createElement("script");
+  el.src = src;
+  document.body.appendChild(el);

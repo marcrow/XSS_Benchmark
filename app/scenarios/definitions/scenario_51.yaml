@@ -1,5 +1,5 @@
 id: 51
-name: "Scenario 51 - payload in eval()"
+name: "payload in eval()"
 description: "Payload injected directly into eval"
 category: "JavaScript"
 template_block: "js_eval_block"

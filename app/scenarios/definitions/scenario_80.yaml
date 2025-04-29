@@ -1,5 +1,5 @@
 id: 80
-name: "Scenario 80 - URLSearchParams with payload"
+name: "URLSearchParams with payload"
 description: "Payload used in URLSearchParams"
 category: "JavaScript"
 template_block: "js_urlparams_block"

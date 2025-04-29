@@ -85,7 +85,7 @@ def scoreboard():
         return jsonify(data)
 
     # Sinon, on veut le scoreboard pour un payload précis
-    scenarios = Scenario.query.all()
+    scenarios = Scenario.query.order_by(Scenario.category.asc(), Scenario.id.asc()).all()
     data = []
     for s in scenarios:
         result = Result.query.filter_by(scenario_id=s.id, payload_id=payload_id).first()
@@ -102,6 +102,7 @@ def scoreboard():
         data.append({
             "scenario_id": s.id,
             "scenario_name": s.name,
+            "scenario_category": s.category,
             "payload_id": payload_id,
             "payload_size": Payload.query.get(payload_id).size if Payload.query.get(payload_id) else 0,
             "status": status,

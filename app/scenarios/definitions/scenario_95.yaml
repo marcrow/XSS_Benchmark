@@ -1,0 +1,11 @@
+id: 95
+name: "Injection in Script Tag – Single Quote Delimiter"
+description: "Injection inside a script using single quotes"
+category: "Brutelogic XSS Gym"
+template_block: "script_single_quote_block"
+html_snippet: |
+  // only js
+js_snippet: |
+  let data = '{{ payload }}';
+
+

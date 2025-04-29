@@ -1,5 +1,5 @@
 id: 78
-name: "Scenario 78 - img.src with payload"
+name: "img.src with payload"
 description: "Payload injected via image.src"
 category: "JavaScript"
 template_block: "js_img_src_block"

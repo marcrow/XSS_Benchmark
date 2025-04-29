@@ -1,0 +1,11 @@
+id: 104
+name: "To modify - Filtered Injection in Javascript Variable – Backticks Delimiter"
+description: "Another filtered payload in backticks variable"
+category: "Brutelogic XSS Gym"
+template_block: "js_var_backticks_filtered2_block"
+html_snippet: |
+  <div>Filtered backtick var with encodeURIComponent</div>
+js_snippet: |
+  let safeData = `Encoded: ${encodeURIComponent('{{ payload }}')}`;
+
+

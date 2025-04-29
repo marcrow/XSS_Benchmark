@@ -1,5 +1,5 @@
 id: 76
-name: "Scenario 76 - data-* attribute via dataset"
+name: "data-* attribute via dataset"
 description: "Payload used in dataset property"
 category: "JavaScript"
 template_block: "js_dataset_block"

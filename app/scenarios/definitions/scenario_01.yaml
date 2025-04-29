@@ -1,7 +1,7 @@
 id: 1
 name: "Scenario 1 - p block"
 description: "Injection into a p tag"
-category: "Basic HTML"
+category: "Brutelogic XSS Gym"
 template_block: "p_block"
 html_snippet: |
   <p>{{ payload }}</p>

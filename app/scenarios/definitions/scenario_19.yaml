@@ -1,7 +1,7 @@
 id: 19
-name: "Scenario 19 - input placeholder"
+name: "input placeholder"
 description: "Injection into an input placeholder"
-category: "Basic HTML"
+category: "Common HTML"
 template_block: "input_placeholder_block"
 html_snippet: |
   <input placeholder="{{ payload }}">

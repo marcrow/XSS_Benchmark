@@ -7,7 +7,7 @@ scenarios_bp = Blueprint('scenarios_bp', __name__)
 @scenarios_bp.route('/scenarios', methods=['GET'])
 def list_scenarios():
     # Get scenarios from DB
-    scenarios = Scenario.query.all()
+    scenarios = Scenario.query.order_by(Scenario.category.asc(), Scenario.id.asc()).all()
     return render_template("scenarios_list.html", scenarios=scenarios)
 
 @scenarios_bp.route('/scenarios/sync', methods=['POST'])
