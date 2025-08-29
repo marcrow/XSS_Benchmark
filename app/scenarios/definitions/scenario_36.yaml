@@ -1,10 +1,10 @@
-id: 36
-name: "download attribute"
-description: "Payload in anchor download attribute"
+id: 37
+name: "img alt text"
+description: "Payload in image alt attribute"
 category: "Common HTML"
-template_block: "a_download_block"
+template_block: "img_alt_block"
 html_snippet: |
-  <a href="/file" download="{{ payload }}">Download</a>
+  <img src="user.jpg" alt="{{ payload }}">
 js_snippet: |
   // No custom JS
 

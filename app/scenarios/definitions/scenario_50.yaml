@@ -1,10 +1,11 @@
 id: 50
-name: "JSON in textarea"
-description: "Payload as part of a JSON blob in <textarea>"
+name: "JSON processed to textarea"
+description: "Payload as part of a JSON blob processed by JS into <textarea>"
 category: "Common HTML"
-template_block: "textarea_json_block"
+template_block: "textarea_json_processed_block"
 html_snippet: |
-  <textarea>{"user_input": "{{ payload }}"}</textarea>
+  <textarea id="output"></textarea>
 js_snippet: |
-  // No custom JS
+  let data = {"user_input": "{{ payload }}"};
+  document.getElementById('output').value = JSON.stringify(data);
 

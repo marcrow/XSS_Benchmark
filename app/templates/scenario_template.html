@@ -47,6 +47,58 @@
                 reportTriggered();
             }
             
+            // Monitor script loading to detect /static/pay.js
+            function monitorScriptLoading() {
+                // Monitor dynamically created script elements
+                const originalCreateElement = document.createElement;
+                document.createElement = function(tagName) {
+                    const element = originalCreateElement.call(document, tagName);
+                    if (tagName.toLowerCase() === 'script') {
+                        // Monitor src changes
+                        const originalSrcSetter = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src').set;
+                        Object.defineProperty(element, 'src', {
+                            set: function(value) {
+                                if (value && value.includes('/static/pay.js')) {
+                                    reportTriggered();
+                                }
+                                originalSrcSetter.call(this, value);
+                            },
+                            get: function() {
+                                return this.getAttribute('src');
+                            }
+                        });
+                        
+                        // Monitor onload event
+                        element.addEventListener('load', function() {
+                            if (this.src && this.src.includes('/static/pay.js')) {
+                                reportTriggered();
+                            }
+                        });
+                    }
+                    return element;
+                };
+                
+                // Monitor existing script elements that might be modified
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList') {
+                            mutation.addedNodes.forEach(function(node) {
+                                if (node.tagName === 'SCRIPT' && node.src && node.src.includes('/static/pay.js')) {
+                                    reportTriggered();
+                                }
+                            });
+                        }
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                            if (mutation.target.src && mutation.target.src.includes('/static/pay.js')) {
+                                reportTriggered();
+                            }
+                        }
+                    });
+                });
+                
+                observer.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+            }
+            
             // Override console.log to detect "x" in arguments
             const originalConsoleLog = console.log;
             console.log = function(...args) {
@@ -70,8 +122,9 @@
                 originalAlert(msg);
             };
             
-            // Start the 3-second timer on page load
+            // Start monitoring on page load
             window.addEventListener('DOMContentLoaded', function() {
+                monitorScriptLoading();
                 notTriggeredTimeout = setTimeout(reportNotTriggered, 2000);
             });
         </script>

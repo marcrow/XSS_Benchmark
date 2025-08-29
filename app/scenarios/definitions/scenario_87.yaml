@@ -4,9 +4,9 @@ description: "Payload parsed as HTML via DOMParser"
 category: "JavaScript"
 template_block: "js_domparser_block"
 html_snippet: |
-  <div>Parsing HTML string</div>
+  <div id="output">Parsing HTML string</div>
 js_snippet: |
   let doc = new DOMParser().parseFromString("{{ payload }}", "text/html");
-  console.log(doc.body.innerHTML);
+  document.getElementById('output').appendChild(doc.body.firstChild);
 
 

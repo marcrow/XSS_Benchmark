@@ -4,9 +4,11 @@ description: "Payload posted via postMessage"
 category: "JavaScript"
 template_block: "js_postmessage_block"
 html_snippet: |
-  <iframe id="targetFrame"></iframe>
+  <div id="output">Waiting for message...</div>
 js_snippet: |
-  let frame = document.getElementById("targetFrame").contentWindow;
-  frame.postMessage("{{ payload }}", "*");
+  window.addEventListener("message", function(event) {
+    document.getElementById("output").innerHTML = event.data;
+  });
+  window.postMessage("{{ payload }}", "*");
 
 
