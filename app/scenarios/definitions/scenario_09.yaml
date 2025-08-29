@@ -4,8 +4,9 @@ description: "Injection into a textarea value"
 category: "Common HTML"
 template_block: "textarea_block"
 html_snippet: |
-  "Brutelogic XSS Gym"
+  <textarea id="userInput"></textarea>
 js_snippet: |
-  // No custom JS
+  let retrievedValue = "{{ payload }}";
+  document.getElementById('userInput').value = retrievedValue;
 
 
